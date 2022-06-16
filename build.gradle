@@ -22,7 +22,7 @@ project.gradle.projectsEvaluated {
 group = 'net.llgava'
 version = '0.0.1-SNAPSHOT'
 description = 'Neelix'
-String mc_version = "1.10"
+String mc_version = "1.13"
 
 repositories {
     mavenCentral()
