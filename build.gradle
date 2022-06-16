@@ -1,22 +1,7 @@
 
 plugins {
-    id 'java'
-    id 'maven-publish'
-}
-
-// Automatically updates plugin versioning against project.version.
-processResources.filesMatching('plugin.yml') {
-    expand(project_version: project.version)
-}
-
-project.gradle.projectsEvaluated {
-    allprojects {
-        java.toolchain {
-            languageVersion = JavaLanguageVersion.of(8)
-        }
-
-        compileJava.options.encoding = 'UTF-8'
-    }
+  id 'java'
+  id 'maven-publish'
 }
 
 group = 'net.llgava'
@@ -24,19 +9,34 @@ version = '0.0.1-SNAPSHOT'
 description = 'Neelix'
 String mc_version = "1.13"
 
-repositories {
-    mavenCentral()
+// Automatically updates plugin versioning against project.version.
+processResources.filesMatching('plugin.yml') {
+  expand(project_version: project.version)
+}
 
-    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-    maven { url 'https://repo.maven.apache.org/maven2/' }
+project.gradle.projectsEvaluated {
+  allprojects {
+    java.toolchain {
+      languageVersion = JavaLanguageVersion.of(8)
+    }
+
+    compileJava.options.encoding = 'UTF-8'
+  }
+}
+
+repositories {
+  mavenCentral()
+
+  maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+  maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+  maven { url 'https://repo.maven.apache.org/maven2/' }
 }
 
 dependencies {
-    // Spigot
-    compileOnly "org.spigotmc:spigot-api:${mc_version}-R0.1-SNAPSHOT"
+  // Spigot
+  compileOnly "org.spigotmc:spigot-api:${mc_version}-R0.1-SNAPSHOT"
 
-    // Lombok
-    compileOnly "org.projectlombok:lombok:1.18.24"
-    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+  // Lombok
+  compileOnly "org.projectlombok:lombok:1.18.24"
+  annotationProcessor 'org.projectlombok:lombok:1.18.24'
 }

@@ -3,4 +3,4 @@ main: net.llgava.Neelix
 description: Future description.
 api-version: 1.13
 #author: Leonardo '_Fyat' Gava
-version: ${project_version}
+version: 0.0.1-SNAPSHOT

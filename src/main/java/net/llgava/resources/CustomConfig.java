@@ -1,60 +1,45 @@
 package net.llgava.resources;
 
 import lombok.Getter;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
-public class CustomConfig {
-  private File customFile;
-  @Getter private final JavaPlugin plugin;
-  @Getter private final String name;
-  @Getter private final boolean copyDefaults;
-  @Getter private FileConfiguration config;
+public abstract class CustomConfig {
+  protected File customFile;
+  @Getter protected JavaPlugin plugin;
+  @Getter protected String name;
+  @Getter protected boolean copyDefaults;
+  protected File dataFolder;
 
+  /**
+   * Creates a new configuration file.
+   * @param plugin The main class of the plugin.
+   * @param name The name of the config file. (Should be the same name as the file in src/main/resources)
+   * @param copyDefaults If true, all values in the default config file will be copied every time when the server is started.
+   */
   public CustomConfig(JavaPlugin plugin, String name, boolean copyDefaults) {
     this.plugin = plugin;
     this.name = name;
     this.copyDefaults = copyDefaults;
+    this.dataFolder = plugin.getDataFolder();
   }
 
-  public CustomConfig build() {
-    File pluginFolder = this.plugin.getDataFolder();
-    this.customFile = new File(pluginFolder, this.name);
-
-    if(!pluginFolder.exists()) { pluginFolder.mkdir(); }
-
-    if(this.copyDefaults) { this.customFile.delete(); }
-
-    if(!this.customFile.exists()) {
-      InputStream resourceFile = this.plugin.getClass().getClassLoader().getResourceAsStream(this.name);
-
-      try {
-        Files.copy(resourceFile, Paths.get(pluginFolder.getPath().concat("/").concat(this.name)));
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+  public static class YAML extends CustomYamlConfig {
+    public YAML(JavaPlugin plugin, String name, boolean copyDefaults) {
+      super(plugin, name, copyDefaults);
     }
-
-    this.config = YamlConfiguration.loadConfiguration(this.customFile);
-
-    return this;
   }
 
-  public boolean save() {
-    try {
-      this.config.save(this.customFile);
-    } catch (IOException e) {
-      e.printStackTrace();
-      return false;
+  public static class JSON extends CustomJsonConfig {
+    public JSON(JavaPlugin plugin, String name, boolean copyDefaults) {
+      super(plugin, name, copyDefaults);
     }
-
-    return true;
   }
+
+  /** @return The builded config file. */
+  public abstract CustomConfig build();
+
+  /** @return True if the file was saved. */
+  public abstract boolean save();
 }
