@@ -1,0 +1,9 @@
+# Folders
+target/
+.idea/
+.vscode/
+.mvn/
+.gradle/
+build/
+
+# Files

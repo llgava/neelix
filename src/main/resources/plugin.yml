@@ -1,0 +1,5 @@
+name: neelix
+main: net.llgava.Neelix
+description: Future description.
+authors: [Leonardo '_Fyat' Gava]
+version: ${project_version}
