@@ -21,7 +21,7 @@ public class CustomJsonConfig extends CustomConfig {
 
   @SneakyThrows
   @Override
-  public CustomConfig build() {
+  public CustomJsonConfig build() {
     Gson gson = new Gson();
     this.customFile = new File(this.dataFolder, this.name);
 

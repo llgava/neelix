@@ -6,5 +6,6 @@ target/
 .gradle/
 build/
 out/
+**/__test__/**
 
 # Files

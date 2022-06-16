@@ -2,5 +2,5 @@ name: neelix
 main: net.llgava.Neelix
 description: Future description.
 api-version: 1.13
-#author: Leonardo '_Fyat' Gava
+author: Leonardo '_Fyat' Gava
 version: ${project_version}

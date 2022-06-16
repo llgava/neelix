@@ -21,7 +21,7 @@ public class CustomYamlConfig extends CustomConfig {
 
   @SneakyThrows
   @Override
-  public CustomConfig build() {
+  public CustomYamlConfig build() {
     this.customFile = new File(this.dataFolder, this.name);
 
     if(!this.dataFolder.exists()) { this.dataFolder.mkdir(); }
