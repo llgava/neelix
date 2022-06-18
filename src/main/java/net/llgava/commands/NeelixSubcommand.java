@@ -2,6 +2,7 @@ package net.llgava.commands;
 
 
 import lombok.Getter;
+import net.llgava.utils.NeelixMessages;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
 
@@ -13,7 +14,7 @@ public abstract class NeelixSubcommand {
 
   public NeelixSubcommand(String name, String permission) {
     this.name = name;
-    this.permission = Objects.requireNonNull(permission, "Permission cannot be null, use empty string instead.");
+    this.permission = Objects.requireNonNull(permission, NeelixMessages.SUBCOMMAND_PERMISSION_CANNOT_BE_NULL.getMessage());
   }
 
   public abstract void execute(Player player, String[] args);

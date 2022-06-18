@@ -1,5 +1,7 @@
 package net.llgava.commands;
 
+import net.llgava.events.NoPermissionForSubcommandEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -37,7 +39,7 @@ public class NeelixCommandExecutor implements TabExecutor {
       }
 
       if(!player.hasPermission(subcommand.getPermission()) && subcommand.getPermission() != null) {
-        player.sendMessage("You don't have permission to use this command.");
+        Bukkit.getServer().getPluginManager().callEvent(new NoPermissionForSubcommandEvent(player));
         return true;
       }
 

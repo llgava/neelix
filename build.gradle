@@ -1,41 +1,63 @@
-
 plugins {
   id 'java-library'
+  id 'maven-publish'
 }
 
 group = 'net.llgava'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-RELEASE'
 description = 'Neelix'
 String mc_version = "1.13"
 
-// Automatically updates plugin versioning against project.version.
 processResources.filesMatching('plugin.yml') {
-  expand(project_version: project.version)
+  expand(project_version: project.version) // Automatically updates plugin versioning against project.version.
 }
 
+/* COMPILE CONFIGURATION */
 project.gradle.projectsEvaluated {
   allprojects {
-    java.toolchain {
-      languageVersion = JavaLanguageVersion.of(8)
+    java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+    compileJava.options.encoding('UTF-8')
+
+    repositories {
+      mavenCentral()
+
+      maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+      maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+      maven { url 'https://repo.maven.apache.org/maven2/' }
     }
 
-    compileJava.options.encoding = 'UTF-8'
+    dependencies {
+      // Spigot
+      compileOnly "org.spigotmc:spigot-api:${mc_version}-R0.1-SNAPSHOT"
+
+      // Lombok
+      compileOnly "org.projectlombok:lombok:1.18.24"
+      annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    }
   }
 }
 
-repositories {
-  mavenCentral()
+/* PUBLISHING CONFIGURATION */
+afterEvaluate {
+  apply plugin: 'maven-publish'
+  publishing {
+    publications {
+      maven(MavenPublication) {
+        artifact("build/libs/neelix-${project.version}.jar") {
+          extension 'jar'
+        }
+      }
+    }
 
-  maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
-  maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-  maven { url 'https://repo.maven.apache.org/maven2/' }
-}
+    repositories {
+      maven {
+        version = project.version
 
-dependencies {
-  // Spigot
-  compileOnly "org.spigotmc:spigot-api:${mc_version}-R0.1-SNAPSHOT"
-
-  // Lombok
-  compileOnly "org.projectlombok:lombok:1.18.24"
-  annotationProcessor 'org.projectlombok:lombok:1.18.24'
+        name = 'snapshots'
+        credentials(PasswordCredentials)
+        allowInsecureProtocol = true
+        url = uri('http://localhost:8081/repository/releases/')
+      }
+    }
+  }
 }
