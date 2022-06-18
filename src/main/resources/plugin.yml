@@ -1,6 +1,6 @@
 name: neelix
 main: net.llgava.Neelix
-description: Future description.
+description: A Java library to avoid repetitive work while developing Minecraft Spigot/Paper plugins.
 api-version: 1.13
 author: Leonardo '_Fyat' Gava
 version: ${project_version}
