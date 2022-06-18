@@ -1,4 +1,4 @@
-# <img width="32" height="32" src="https://raw.githubusercontent.com/llgava/neelix/main/.github/assets/neelix-icon.png" title="Neelix Icon"> Neelix
+# <img width="22" height="22" src="https://raw.githubusercontent.com/llgava/neelix/main/.github/assets/neelix-icon.svg" title="Neelix Icon"> Neelix
 
 **README in development.**
 
