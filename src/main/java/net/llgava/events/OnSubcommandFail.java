@@ -16,10 +16,10 @@ public class OnSubcommandFail extends Event {
   @Getter private final NeelixSubcommand subcommand;
   @Getter private final SubcommandFailType failType;
 
-  public OnSubcommandFail(Player playerWithoutPermission, NeelixSubcommand subcommand, SubcommandFailType errorType) {
+  public OnSubcommandFail(Player playerWithoutPermission, NeelixSubcommand subcommand, SubcommandFailType failType) {
     this.playerWithoutPermission = playerWithoutPermission;
     this.subcommand = subcommand;
-    this.failType = errorType;
+    this.failType = failType;
   }
 
   @Override
