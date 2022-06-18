@@ -1,12 +1,4 @@
-# Folders
-target/
-.idea/
-.vscode/
-.mvn/
-.gradle/
-gradle/
-build/
-out/
-
-# Files
-./gradle.properties
+.gradle
+.idea
+build
+gradle.properties
