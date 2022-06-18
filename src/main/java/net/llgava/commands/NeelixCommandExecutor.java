@@ -1,6 +1,7 @@
 package net.llgava.commands;
 
-import net.llgava.events.NoPermissionForSubcommandEvent;
+import net.llgava.events.OnSubcommandFail;
+import net.llgava.utils.SubcommandFailType;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -35,11 +36,14 @@ public class NeelixCommandExecutor implements TabExecutor {
       NeelixSubcommand subcommand = this.getSubcommandByName(args[0]);
 
       if(subcommand == null) {
+        Bukkit.getServer().getPluginManager()
+          .callEvent(new OnSubcommandFail(player, null, SubcommandFailType.SUBCOMMAND_NOT_FOUND));
         return true;
       }
 
-      if(!player.hasPermission(subcommand.getPermission()) && subcommand.getPermission() != null) {
-        Bukkit.getServer().getPluginManager().callEvent(new NoPermissionForSubcommandEvent(player, subcommand));
+      if(!player.hasPermission(subcommand.getPermission()) && !subcommand.getPermission().isEmpty()) {
+        Bukkit.getServer().getPluginManager()
+          .callEvent(new OnSubcommandFail(player, subcommand, SubcommandFailType.WITHOUT_PERMISSION_FOR_SUBCOMMAND));
         return true;
       }
 
@@ -51,12 +55,15 @@ public class NeelixCommandExecutor implements TabExecutor {
 
   @Override
   public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+    Player player = (Player) sender;
     ArrayList<String> completes = new ArrayList<>();
 
     if(args.length == 1) {
       for(NeelixSubcommand subcommand : this.subcommands) {
         if(subcommand.getName().startsWith(args[0])) {
-          completes.add(subcommand.getName());
+          if(player.hasPermission(subcommand.getPermission()) || subcommand.getPermission().isEmpty()) {
+            completes.add(subcommand.getName());
+          }
         }
       }
 

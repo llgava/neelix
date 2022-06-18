@@ -4,3 +4,8 @@ description: Future description.
 api-version: 1.13
 author: Leonardo '_Fyat' Gava
 version: ${project_version}
+commands:
+  give:
+    usage: /<command>
+  gad:
+    usage: /<command>

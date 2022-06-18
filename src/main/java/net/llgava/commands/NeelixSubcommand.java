@@ -1,6 +1,5 @@
 package net.llgava.commands;
 
-
 import lombok.Getter;
 import net.llgava.utils.NeelixMessages;
 import org.bukkit.command.CommandExecutor;
@@ -11,11 +10,6 @@ import java.util.Objects;
 public abstract class NeelixSubcommand {
   @Getter private final String name;
   @Getter private final String permission;
-
-  public NeelixSubcommand() {
-    this.name = "";
-    this.permission = "";
-  }
 
   public NeelixSubcommand(String name, String permission) {
     this.name = name;

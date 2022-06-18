@@ -1,6 +1,5 @@
 package net.llgava;
 
-
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Neelix extends JavaPlugin {

@@ -53,7 +53,7 @@ afterEvaluate {
       maven {
         version = project.version
 
-        name = 'snapshots'
+        name = 'releases'
         credentials(PasswordCredentials)
         allowInsecureProtocol = true
         url = uri('http://localhost:8081/repository/releases/')
