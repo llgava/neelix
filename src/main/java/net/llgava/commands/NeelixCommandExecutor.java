@@ -39,7 +39,7 @@ public class NeelixCommandExecutor implements TabExecutor {
       }
 
       if(!player.hasPermission(subcommand.getPermission()) && subcommand.getPermission() != null) {
-        Bukkit.getServer().getPluginManager().callEvent(new NoPermissionForSubcommandEvent(player));
+        Bukkit.getServer().getPluginManager().callEvent(new NoPermissionForSubcommandEvent(player, subcommand));
         return true;
       }
 

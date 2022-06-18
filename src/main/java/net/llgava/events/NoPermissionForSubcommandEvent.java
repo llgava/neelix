@@ -2,6 +2,7 @@ package net.llgava.events;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.llgava.commands.NeelixSubcommand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -11,9 +12,11 @@ public class NoPermissionForSubcommandEvent extends Event {
 
   @Getter @Setter private boolean cancelled;
   @Getter private final Player playerWithoutPermission;
+  @Getter private final NeelixSubcommand subcommand;
 
-  public NoPermissionForSubcommandEvent(Player playerWithoutPermission) {
+  public NoPermissionForSubcommandEvent(Player playerWithoutPermission, NeelixSubcommand subcommand) {
     this.playerWithoutPermission = playerWithoutPermission;
+    this.subcommand = subcommand;
   }
 
   @Override
