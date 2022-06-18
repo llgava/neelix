@@ -4,6 +4,7 @@ target/
 .vscode/
 .mvn/
 .gradle/
+gradle/
 build/
 out/
 
