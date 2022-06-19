@@ -9,20 +9,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        java: ['8', '11', '16', '17']
 
     steps:
       - name: Checkout 🔃
         uses: actions/checkout@v3
 
-      - name: Installing JDK ${{ matrix.java }} ☕
+      - name: Installing JDK 8 ☕
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
-          java-version: ${{ matrix.java }}
-          cache: 'gradle'
+          java-version: 8
+          distribution: 'adopt'
 
       - name: Building with Gradle 🔨
-        run: ./gradlew build --no-daemon
+        run: ./gradlew build
