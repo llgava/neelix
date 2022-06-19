@@ -37,13 +37,13 @@ public class NeelixCommandExecutor implements TabExecutor {
 
       if(subcommand == null) {
         Bukkit.getServer().getPluginManager()
-          .callEvent(new OnSubcommandFail(player, null, SubcommandFailType.SUBCOMMAND_NOT_FOUND));
+          .callEvent(new OnSubcommandFail(player, command, null, SubcommandFailType.SUBCOMMAND_NOT_FOUND));
         return true;
       }
 
       if(!player.hasPermission(subcommand.getPermission()) && !subcommand.getPermission().isEmpty()) {
         Bukkit.getServer().getPluginManager()
-          .callEvent(new OnSubcommandFail(player, subcommand, SubcommandFailType.WITHOUT_PERMISSION_FOR_SUBCOMMAND));
+          .callEvent(new OnSubcommandFail(player, command, subcommand, SubcommandFailType.WITHOUT_PERMISSION_FOR_SUBCOMMAND));
         return true;
       }
 
