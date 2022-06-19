@@ -1,6 +1,7 @@
 package net.llgava.resources;
 
 import lombok.Getter;
+import net.llgava.utils.NeelixMessages;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -25,12 +26,14 @@ public abstract class CustomConfig {
     this.dataFolder = plugin.getDataFolder();
   }
 
+  /** You can use {@link CustomYamlConfig} instead static class. */
   public static class YAML extends CustomYamlConfig {
     public YAML(JavaPlugin plugin, String name, boolean copyDefaults) {
       super(plugin, name, copyDefaults);
     }
   }
 
+  /** You can use {@link CustomJsonConfig} instead static class. */
   public static class JSON extends CustomJsonConfig {
     public JSON(JavaPlugin plugin, String name, boolean copyDefaults) {
       super(plugin, name, copyDefaults);
@@ -42,4 +45,15 @@ public abstract class CustomConfig {
 
   /** @return True if the file was saved. */
   public abstract boolean save();
+
+  protected boolean isValidExtension(String extension) {
+    if(!this.name.endsWith(extension)) {
+      throw new Error(
+        NeelixMessages.INVALID_FILE_EXTENSION.getMessage()
+          .replace("{EXTENSION}", extension)
+      );
+    }
+
+    return true;
+  }
 }

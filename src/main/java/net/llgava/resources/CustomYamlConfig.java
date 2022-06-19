@@ -2,6 +2,7 @@ package net.llgava.resources;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
+import net.llgava.utils.NeelixMessages;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,6 +14,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class CustomYamlConfig extends CustomConfig {
+  private static final String FILE_EXTENSION = ".yml";
+
   @Getter private FileConfiguration config;
 
   public CustomYamlConfig(JavaPlugin plugin, String name, boolean copyDefaults) {
@@ -22,6 +25,8 @@ public class CustomYamlConfig extends CustomConfig {
   @SneakyThrows
   @Override
   public CustomYamlConfig build() {
+    if(!this.isValidExtension(FILE_EXTENSION)) return null;
+
     this.customFile = new File(this.dataFolder, this.name);
 
     if(!this.dataFolder.exists()) { this.dataFolder.mkdir(); }
