@@ -20,5 +20,8 @@ jobs:
           java-version: 8
           distribution: 'adopt'
 
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       - name: Building with Gradle 🔨
         run: ./gradlew build
