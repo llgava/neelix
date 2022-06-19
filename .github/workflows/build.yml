@@ -1,0 +1,28 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: ['8', '11', '16', '17']
+
+    steps:
+      - name: Checkout 🔃
+        uses: actions/checkout@v3
+
+      - name: Installing JDK ${{ matrix.java }} ☕
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: ${{ matrix.java }}
+          cache: 'gradle'
+
+      - name: Building with Gradle 🔨
+        run: ./gradlew build --no-daemon
