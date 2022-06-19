@@ -3,7 +3,7 @@ package net.llgava.events;
 import lombok.Getter;
 import lombok.Setter;
 import net.llgava.commands.NeelixSubcommand;
-import net.llgava.utils.SubcommandFailType;
+import net.llgava.utils.NeelixSubcommandFailType;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -15,10 +15,10 @@ public class OnSubcommandFailEvent extends Event {
   @Getter @Setter private boolean cancelled;
   @Getter private final Player playerWithoutPermission;
   @Getter private final NeelixSubcommand subcommand;
-  @Getter private final SubcommandFailType failType;
+  @Getter private final NeelixSubcommandFailType failType;
   @Getter private final Command parent;
 
-  public OnSubcommandFailEvent(Player playerWithoutPermission, Command parent, NeelixSubcommand subcommand, SubcommandFailType failType) {
+  public OnSubcommandFailEvent(Player playerWithoutPermission, Command parent, NeelixSubcommand subcommand, NeelixSubcommandFailType failType) {
     this.playerWithoutPermission = playerWithoutPermission;
     this.subcommand = subcommand;
     this.failType = failType;
