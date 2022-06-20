@@ -1,6 +1,6 @@
 
 # <img width="22" height="22" src="https://raw.githubusercontent.com/llgava/neelix/main/.github/assets/neelix-icon.svg" title="Neelix Icon"> Neelix
-![Build](https://github.com/llgava/neelix/workflows/Build/badge.svg)
+![Build](https://github.com/llgava/neelix/workflows/Build/badge.svg) ![Tests](https://github.com/llgava/neelix/workflows/Tests/badge.svg)
 
 Let Neelix do the repetitive work for you!<br />
 A Java Library with focus on turn the Minecraft Spigot/Paper plugin development faster.

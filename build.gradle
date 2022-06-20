@@ -4,12 +4,17 @@ plugins {
 }
 
 group = 'net.llgava'
-version = '0.0.2-RELEASE'
+version = '0.0.1-SNAPSHOT'
 description = 'Neelix'
 String mc_version = "1.13"
 
 processResources.filesMatching('plugin.yml') {
   expand(project_version: project.version) // Automatically updates plugin versioning against project.version.
+}
+
+/** TESTS **/
+test {
+  useJUnit()
 }
 
 /* COMPILE CONFIGURATION */
@@ -33,6 +38,9 @@ project.gradle.projectsEvaluated {
       // Lombok
       compileOnly "org.projectlombok:lombok:1.18.24"
       annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+      // JUnit
+      testImplementation 'junit:junit:4.13'
     }
   }
 }

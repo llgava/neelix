@@ -50,7 +50,7 @@ public abstract class CustomConfig {
     if(!this.name.endsWith(extension)) {
       throw new Error(
         NeelixMessages.INVALID_FILE_EXTENSION.getMessage()
-          .replace("{EXTENSION}", extension)
+          .replace("{1}", extension)
       );
     }
 

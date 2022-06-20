@@ -1,0 +1,28 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🔃
+        uses: actions/checkout@v3
+
+      - name: Installing JDK 8 ☕
+        uses: actions/setup-java@v3
+        with:
+          java-version: 8
+          distribution: 'adopt'
+          cache: gradle
+
+      - name: Make gradlew executable 👾
+        run: chmod +x ./gradlew
+
+      - name: Building with Gradle 🔨
+        run: ./gradlew test
