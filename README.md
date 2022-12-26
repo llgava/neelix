@@ -12,6 +12,18 @@ A Java Library with focus on turn the Minecraft Spigot/Paper plugin development 
 
 ## This README are in development, while this, check the [Wiki](https://github.com/llgava/neelix/wiki).
 
-### Contact
+### Instalation
+```gradle
+repositories {
+  ...
+  maven { url 'https://jitpack.io' }
+}
 
+dependencies {
+  ...
+  implementation 'com.github.llgava:neelix:v0.0.1-SNAPSHOT'
+}
+```
+
+### Contact
 Leonardo Luiz Gava - [@llgava](https://twitter.com/llgava "Leonardo Luiz Gava • Twitter") - <me@llgava.net>
