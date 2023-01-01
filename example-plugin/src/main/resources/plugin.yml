@@ -6,3 +6,8 @@ prefix: ExamplePlugin
 description: A simple plugin to test and play around with Neelix library.
 authors:
   - Leonardo '_Fyat' Gava
+commands:
+  minecraft-items:
+    aliases:
+      - mc-items
+    usage: /<command>

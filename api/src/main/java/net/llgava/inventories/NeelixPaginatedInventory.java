@@ -2,6 +2,7 @@ package net.llgava.inventories;
 
 
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -19,28 +20,28 @@ public class NeelixPaginatedInventory extends NeelixInventory {
     super(size, title, lockedSlots);
     this.items = items;
 
+    //this.inventory = Bukkit.createInventory(null, this.size, this.title);
     this.mountInventoryPages();
   }
 
   private void mountInventoryPages() {
-    int currentSlot = 0;
     int currentItemIndex = 0;
     int currentPageIndex = 0;
     Map<Integer, ItemStack> currentPageItems = new HashMap<>();
 
     for (ItemStack item : this.items) {
-      this.skipLockedSlots(currentSlot);
+      this.skipLockedSlots();
 
-      currentPageItems.put(currentSlot, item);
+      currentPageItems.put(this._currentSlot, item);
       currentItemIndex++;
-      currentSlot++;
+      this._currentSlot++;
 
       if (currentItemIndex % this.getMaxItemsPerPage() == 0) {
         this.pages.put(currentPageIndex, currentPageItems);
 
-        currentItemIndex++;
+        currentPageIndex++;
         currentPageItems = new HashMap<>();
-        currentSlot = 0;
+        this._currentSlot = 0;
       }
     }
 
