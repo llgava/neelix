@@ -18,6 +18,10 @@ public abstract class NeelixSubcommand {
 
   public abstract void execute(Player player, String[] args);
 
+  /**
+   * Convert the {@link NeelixSubcommand} to a {@link CommandExecutor}.
+   * @return A {@link CommandExecutor}
+   */
   public CommandExecutor toCommandExecutor() {
     return (sender, command, label, args) -> {
       this.execute((Player) sender, args);
