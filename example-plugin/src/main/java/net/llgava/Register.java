@@ -21,7 +21,7 @@ public class Register {
 
   public static void inventories() {
     Neelix.getInventoryManager().registerInventory(
-      new NeelixPaginatedInventory(54, "Minecraft Items", null, getItems(), new NeelixPaginatedNavigation())
+      new NeelixPaginatedInventory(54, "Minecraft Items", LOCKED_SLOTS, getItems(), new NeelixPaginatedNavigation())
     );
   }
 
