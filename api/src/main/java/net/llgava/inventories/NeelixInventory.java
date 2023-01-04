@@ -13,7 +13,7 @@ public abstract class NeelixInventory {
   @Getter protected final Inventory inventory;
   @Getter protected final NeelixInventoryType type = NeelixInventoryType.DEFAULT;
 
-  @Getter protected int currentSlot;
+  protected int currentSlot;
 
   public NeelixInventory(int size, String title, List<Integer> lockedSlots) {
     this.currentSlot = 0;
