@@ -15,11 +15,11 @@ public final class ExamplePlugin extends JavaPlugin {
   @Override
   public void onEnable() {
     instance = this;
+    Neelix.init(this);
 
     Resources.Registry();
     Register.commands();
-
     Register.items(items);
-
+    Register.inventories();
   }
 }

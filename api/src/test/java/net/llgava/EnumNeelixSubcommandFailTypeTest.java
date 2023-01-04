@@ -3,7 +3,7 @@ package net.llgava;
 import net.llgava.utils.NeelixSubcommandFailType;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 public class EnumNeelixSubcommandFailTypeTest {
 

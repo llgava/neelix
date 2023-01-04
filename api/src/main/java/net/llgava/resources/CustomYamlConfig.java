@@ -2,7 +2,6 @@ package net.llgava.resources;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
-import net.llgava.utils.NeelixMessages;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;

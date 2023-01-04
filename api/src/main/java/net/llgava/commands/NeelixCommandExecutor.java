@@ -73,9 +73,9 @@ public class NeelixCommandExecutor implements TabExecutor {
     return EMPTY_TAB_COMPLETER;
   }
 
-  public NeelixSubcommand getSubcommandByName(String name) {
+  public NeelixSubcommand getSubcommandByName(String value) {
     for(NeelixSubcommand subcommand : this.subcommands) {
-      if(subcommand.getName().equalsIgnoreCase(name)) {
+      if(subcommand.getName().equalsIgnoreCase(value)) {
         return subcommand;
       }
     }

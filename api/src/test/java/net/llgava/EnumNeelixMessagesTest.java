@@ -3,7 +3,7 @@ package net.llgava;
 import net.llgava.utils.NeelixMessages;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class EnumNeelixMessagesTest {
 
