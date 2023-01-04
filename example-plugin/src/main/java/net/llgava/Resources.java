@@ -5,7 +5,7 @@ import net.llgava.resources.CustomYamlConfig;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import static net.llgava.ExamplePlugin.getInstance;
+import static net.llgava.ExamplePlugin.*;
 
 public class Resources {
   private static final JavaPlugin plugin = getInstance();

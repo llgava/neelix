@@ -9,8 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
 
-import static net.llgava.ExamplePlugin.getInstance;
-import static net.llgava.ExamplePlugin.getItems;
+import static net.llgava.ExamplePlugin.*;
 
 public class Register {
   private static final JavaPlugin plugin = getInstance();
@@ -22,7 +21,7 @@ public class Register {
 
   public static void inventories() {
     Neelix.getInventoryManager().registerInventory(
-      new NeelixPaginatedInventory(54, "Minecraft Items", LOCKED_SLOTS, getItems(), new NeelixPaginatedNavigation())
+      new NeelixPaginatedInventory(54, "Minecraft Items", null, getItems(), new NeelixPaginatedNavigation())
     );
   }
 
