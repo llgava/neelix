@@ -25,18 +25,6 @@ public class NeelixPaginatedNavigation {
     this.previousNavigationItem = previous;
   }
 
-  public void onClickNextNavigationItem(NeelixPaginatedInventory inventory, Player player, int clickedSlot) {
-    if (clickedSlot == this.nextNavigationItem.getSlot()) {
-      inventory.openInventoryOnNextPage(player);
-    }
-  }
-
-  public void onClickPreviousNavigationItem(NeelixPaginatedInventory inventory, Player player, int clickedSlot) {
-    if (clickedSlot == this.previousNavigationItem.getSlot()) {
-      inventory.openInventoryOnPreviousPage(player);
-    }
-  }
-
   private static ItemStack defaultNavigationItem(String name) {
     ItemStack item = new ItemStack(Material.ARROW);
     ItemMeta meta = item.getItemMeta();
