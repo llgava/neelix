@@ -2,7 +2,9 @@ package net.llgava.events;
 
 import net.llgava.Neelix;
 import net.llgava.inventories.NeelixInventory;
+import net.llgava.inventories.NeelixInventoryItem;
 import net.llgava.inventories.NeelixPaginatedInventory;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,8 +22,11 @@ public class NeelixInventoryHandler implements Listener {
     if (inventory.isPaginatedInventory()) {
       NeelixPaginatedInventory paginatedInventory = (NeelixPaginatedInventory) inventory;
 
-      paginatedInventory.getNavigation().onClickNextNavigationItem(paginatedInventory, player, clickedSlot);
-      paginatedInventory.getNavigation().onClickPreviousNavigationItem(paginatedInventory, player, clickedSlot);
+      NeelixInventoryItem clickedItem = paginatedInventory.getPages().get(paginatedInventory.getCurrentOpenedPage()).get(clickedSlot);
+
+      if (clickedItem == null) { return; }
+
+      clickedItem.onClick(inventory, player, clickedSlot, clickedItem.getItem());
     }
 
     event.setCancelled(true);

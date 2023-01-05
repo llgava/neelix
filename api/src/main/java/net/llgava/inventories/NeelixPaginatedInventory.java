@@ -2,23 +2,24 @@ package net.llgava.inventories;
 
 
 import lombok.Getter;
+import net.llgava.items.NextInventoryPageItem;
+import net.llgava.items.PreviousInventoryPageItem;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class NeelixPaginatedInventory extends NeelixInventory {
-  @Getter private final List<ItemStack> items;
-  @Getter private final Map<Integer, Map<Integer, ItemStack>> pages = new HashMap<>();
+  @Getter private final List<NeelixInventoryItem> items;
   @Getter private final NeelixPaginatedNavigation navigation;
   @Getter NeelixInventoryType type = NeelixInventoryType.PAGINATED;
+  @Getter private final Map<Integer, Map<Integer, NeelixInventoryItem>> pages = new HashMap<>(); // <page, <slot, item>>
 
   @Getter private int currentOpenedPage = 0;
 
-  public NeelixPaginatedInventory(int size, String title, List<Integer> lockedSlots, List<ItemStack> items, NeelixPaginatedNavigation navigation) {
+  public NeelixPaginatedInventory(int size, String title, List<Integer> lockedSlots, List<NeelixInventoryItem> items, NeelixPaginatedNavigation navigation) {
     super(size, title, lockedSlots);
     this.navigation = navigation;
     this.items = items;
@@ -26,32 +27,33 @@ public class NeelixPaginatedInventory extends NeelixInventory {
     this.mountInventoryPages();
   }
 
-  private void mountNavigation() {
-    NeelixNavigationItem next =  this.navigation.getNextNavigationItem();
-    NeelixNavigationItem previous =  this.navigation.getPreviousNavigationItem();
+  private void mountNavigation(Map<Integer, NeelixInventoryItem> currentPageItems) {
+    NextInventoryPageItem next =  this.navigation.getNextNavigationItem();
+    PreviousInventoryPageItem previous =  this.navigation.getPreviousNavigationItem();
 
     if (!this.lockedSlots.contains(next.getSlot())) { this.lockedSlots.add(next.getSlot()); }
     if (!this.lockedSlots.contains(previous.getSlot())) { this.lockedSlots.add(previous.getSlot()); }
 
-    this.inventory.setItem(next.getSlot(), next.getItem());
-    this.inventory.setItem(previous.getSlot(), previous.getItem());
+    currentPageItems.put(next.getSlot(), next);
+    currentPageItems.put(previous.getSlot(), previous);
   }
 
   private void mountInventoryPages() {
-    this.mountNavigation();
 
     int currentItemIndex = 0;
     int currentPageIndex = 0;
-    Map<Integer, ItemStack> currentPageItems = new HashMap<>();
+    Map<Integer, NeelixInventoryItem> currentPageItems = new HashMap<>();
 
-    for (ItemStack item : this.items) {
+
+    for (NeelixInventoryItem inventoryItem : this.items) {
       this.skipLockedSlots();
 
-      currentPageItems.put(this.currentSlot, item);
+      currentPageItems.put(this.currentSlot, inventoryItem);
       currentItemIndex++;
       this.currentSlot++;
 
       if (currentItemIndex % this.getMaxItemsPerPage() == 0) {
+        this.mountNavigation(currentPageItems);
         this.pages.put(currentPageIndex, currentPageItems);
 
         currentPageIndex++;
@@ -60,6 +62,7 @@ public class NeelixPaginatedInventory extends NeelixInventory {
       }
     }
 
+    this.mountNavigation(currentPageItems);
     this.pages.put(currentPageIndex, currentPageItems);
   }
 
@@ -80,7 +83,9 @@ public class NeelixPaginatedInventory extends NeelixInventory {
     if (page >= lastPage) { this.currentOpenedPage = lastPage; }
     if (!(page <= firstPage) && !(page >= lastPage)) { this.currentOpenedPage = page; }
 
-    this.pages.get(this.currentOpenedPage).forEach(this.inventory::setItem);
+    this.pages.get(this.currentOpenedPage).forEach((slot, inventoryItem) -> {
+      this.inventory.setItem(slot, inventoryItem.getItem());
+    });
 
     return this.inventory;
   }

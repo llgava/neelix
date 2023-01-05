@@ -27,8 +27,6 @@ public abstract class NeelixInventory {
 
   /** Avoid locked slots. */
   protected void skipLockedSlots() {
-    if(this.lockedSlots == null) { return; }
-
     if(this.lockedSlots.contains(this.currentSlot)) {
       do {
         this.currentSlot++;

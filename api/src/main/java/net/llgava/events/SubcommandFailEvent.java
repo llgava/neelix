@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class OnSubcommandFailEvent extends Event {
+public class SubcommandFailEvent extends Event {
   private static final HandlerList HANDLERS = new HandlerList();
 
   @Getter @Setter private boolean cancelled;
@@ -18,7 +18,7 @@ public class OnSubcommandFailEvent extends Event {
   @Getter private final NeelixSubcommandFailType failType;
   @Getter private final Command parent;
 
-  public OnSubcommandFailEvent(Player playerWithoutPermission, Command parent, NeelixSubcommand subcommand, NeelixSubcommandFailType failType) {
+  public SubcommandFailEvent(Player playerWithoutPermission, Command parent, NeelixSubcommand subcommand, NeelixSubcommandFailType failType) {
     this.playerWithoutPermission = playerWithoutPermission;
     this.subcommand = subcommand;
     this.failType = failType;
