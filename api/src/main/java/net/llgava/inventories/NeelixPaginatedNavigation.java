@@ -5,7 +5,6 @@ import net.llgava.items.NextInventoryPageItem;
 import net.llgava.items.PreviousInventoryPageItem;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
