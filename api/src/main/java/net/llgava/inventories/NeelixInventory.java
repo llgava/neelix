@@ -12,18 +12,22 @@ public abstract class NeelixInventory {
   @Getter protected final int size;
   @Getter protected final String title;
   @Getter protected List<Integer> lockedSlots;
+  @Getter protected final List<NeelixInventoryItem> items;
   @Getter protected final Inventory inventory;
-  @Getter protected final NeelixInventoryType type = NeelixInventoryType.DEFAULT;
+  @Getter protected final NeelixInventoryType type = NeelixInventoryType.NONE;
 
   protected int currentSlot;
 
-  public NeelixInventory(int size, String title, @Nullable List<Integer> lockedSlots) {
+  public NeelixInventory(int size, String title, @Nullable List<Integer> lockedSlots, List<NeelixInventoryItem> items) {
     this.currentSlot = 0;
     this.size = size;
     this.title = title;
     this.lockedSlots = lockedSlots != null ? lockedSlots : new ArrayList<>();
+    this.items = items;
     this.inventory = Bukkit.createInventory(null, this.size, this.title);
   }
+
+  protected abstract void mountInventory();
 
   /** Avoid locked slots. */
   protected void skipLockedSlots() {
@@ -34,6 +38,7 @@ public abstract class NeelixInventory {
     }
   }
 
+  public boolean isSimpleInventory() { return this instanceof NeelixSimpleInventory; }
   public boolean isPaginatedInventory() {
     return this instanceof NeelixPaginatedInventory;
   }

@@ -10,19 +10,16 @@ import java.util.List;
 import java.util.Map;
 
 public class NeelixPaginatedInventory extends NeelixInventory {
-  @Getter private final List<NeelixInventoryItem> items;
   @Getter private final NeelixPaginatedNavigation navigation;
   @Getter NeelixInventoryType type = NeelixInventoryType.PAGINATED;
-  @Getter private Map<Integer, Map<Integer, NeelixInventoryItem>> pages = new HashMap<>(); // <page, <slot, item>>
+  @Getter private final Map<Integer, Map<Integer, NeelixInventoryItem>> pages = new HashMap<>(); // <page, <slot, item>>
 
   @Getter private int currentOpenedPage = 0;
 
   public NeelixPaginatedInventory(int size, String title, List<Integer> lockedSlots, List<NeelixInventoryItem> items, NeelixPaginatedNavigation navigation) {
-    super(size, title, lockedSlots);
+    super(size, title, lockedSlots, items);
     this.navigation = navigation;
-    this.items = items;
-
-    this.mountInventoryPages();
+    this.mountInventory();
   }
 
   /** Add navigation items slot on locked slots to prevent item overwritten. */
@@ -39,7 +36,8 @@ public class NeelixPaginatedInventory extends NeelixInventory {
     currentPageItems.put(this.navigation.getPreviousNavigationItem().getSlot(), this.navigation.getPreviousNavigationItem());
   }
 
-  private void mountInventoryPages() {
+  @Override
+  protected void mountInventory() {
     this.updateLockedSlots();
 
     int currentItemIndex = 0;

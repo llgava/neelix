@@ -7,7 +7,11 @@ description: A simple plugin to test and play around with Neelix library.
 authors:
   - Leonardo '_Fyat' Gava
 commands:
-  minecraft-items:
+  minecraft-items-simple:
     aliases:
-      - mc-items
+      - mc-items-simple
+    usage: /<command>
+  minecraft-items-paginated:
+    aliases:
+      - mc-items-paginated
     usage: /<command>

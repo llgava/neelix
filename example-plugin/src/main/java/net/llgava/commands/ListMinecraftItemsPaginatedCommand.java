@@ -1,18 +1,13 @@
 package net.llgava.commands;
 
 import net.llgava.Neelix;
-import net.llgava.Resources;
 import net.llgava.inventories.NeelixPaginatedInventory;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.List;
-
-public class ListMinecraftItemsCommand implements CommandExecutor {
-  private static final List<Integer> LOCKED_SLOTS = Resources.getCustomConfig().getConfig().getIntegerList("locked-slots");
-
+public class ListMinecraftItemsPaginatedCommand implements CommandExecutor {
   @Override
   public boolean onCommand(CommandSender sender, Command command, String _label, String[] args) {
     if (!(sender instanceof Player)) return true;

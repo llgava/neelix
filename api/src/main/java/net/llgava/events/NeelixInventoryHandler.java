@@ -4,7 +4,7 @@ import net.llgava.Neelix;
 import net.llgava.inventories.NeelixInventory;
 import net.llgava.inventories.NeelixInventoryItem;
 import net.llgava.inventories.NeelixPaginatedInventory;
-import org.bukkit.Bukkit;
+import net.llgava.inventories.NeelixSimpleInventory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,17 +17,22 @@ public class NeelixInventoryHandler implements Listener {
     Player player = (Player) event.getView().getPlayer();
     int clickedSlot = event.getRawSlot();
     NeelixInventory inventory = Neelix.getInventoryManager().getInventoryByTitle(event.getView().getTitle());
+    NeelixInventoryItem clickedItem = null;
 
     if (inventory == null) { return; }
+
+    if (inventory.isSimpleInventory()) {
+      NeelixSimpleInventory simpleInventory = (NeelixSimpleInventory) inventory;
+      clickedItem = simpleInventory.getParsedItem().get(clickedSlot);
+    }
+
     if (inventory.isPaginatedInventory()) {
       NeelixPaginatedInventory paginatedInventory = (NeelixPaginatedInventory) inventory;
-
-      NeelixInventoryItem clickedItem = paginatedInventory.getPages().get(paginatedInventory.getCurrentOpenedPage()).get(clickedSlot);
-
-      if (clickedItem == null) { return; }
-
-      clickedItem.onClick(inventory, player, clickedSlot, clickedItem.getItem());
+      clickedItem = paginatedInventory.getPages().get(paginatedInventory.getCurrentOpenedPage()).get(clickedSlot);
     }
+
+    if (clickedItem == null) { return; }
+    clickedItem.onClick(inventory, player, clickedSlot, clickedItem.getItem());
 
     event.setCancelled(true);
   }
