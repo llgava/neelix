@@ -2,8 +2,6 @@ package net.llgava.inventories;
 
 
 import lombok.Getter;
-import net.llgava.items.NextInventoryPageItem;
-import net.llgava.items.PreviousInventoryPageItem;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
@@ -15,7 +13,7 @@ public class NeelixPaginatedInventory extends NeelixInventory {
   @Getter private final List<NeelixInventoryItem> items;
   @Getter private final NeelixPaginatedNavigation navigation;
   @Getter NeelixInventoryType type = NeelixInventoryType.PAGINATED;
-  @Getter private final Map<Integer, Map<Integer, NeelixInventoryItem>> pages = new HashMap<>(); // <page, <slot, item>>
+  @Getter private Map<Integer, Map<Integer, NeelixInventoryItem>> pages = new HashMap<>(); // <page, <slot, item>>
 
   @Getter private int currentOpenedPage = 0;
 
@@ -27,23 +25,26 @@ public class NeelixPaginatedInventory extends NeelixInventory {
     this.mountInventoryPages();
   }
 
+  /** Add navigation items slot on locked slots to prevent item overwritten. */
+  private void updateLockedSlots() {
+    int nextSlot = this.navigation.getNextNavigationItem().getSlot();
+    int previousSlot = this.navigation.getPreviousNavigationItem().getSlot();
+
+    if (!this.lockedSlots.contains(nextSlot)) { this.lockedSlots.add(nextSlot); }
+    if (!this.lockedSlots.contains(previousSlot)) { this.lockedSlots.add(previousSlot); }
+  }
+
   private void mountNavigation(Map<Integer, NeelixInventoryItem> currentPageItems) {
-    NextInventoryPageItem next =  this.navigation.getNextNavigationItem();
-    PreviousInventoryPageItem previous =  this.navigation.getPreviousNavigationItem();
-
-    if (!this.lockedSlots.contains(next.getSlot())) { this.lockedSlots.add(next.getSlot()); }
-    if (!this.lockedSlots.contains(previous.getSlot())) { this.lockedSlots.add(previous.getSlot()); }
-
-    currentPageItems.put(next.getSlot(), next);
-    currentPageItems.put(previous.getSlot(), previous);
+    currentPageItems.put(this.navigation.getNextNavigationItem().getSlot(), this.navigation.getNextNavigationItem());
+    currentPageItems.put(this.navigation.getPreviousNavigationItem().getSlot(), this.navigation.getPreviousNavigationItem());
   }
 
   private void mountInventoryPages() {
+    this.updateLockedSlots();
 
     int currentItemIndex = 0;
     int currentPageIndex = 0;
     Map<Integer, NeelixInventoryItem> currentPageItems = new HashMap<>();
-
 
     for (NeelixInventoryItem inventoryItem : this.items) {
       this.skipLockedSlots();
@@ -76,6 +77,7 @@ public class NeelixPaginatedInventory extends NeelixInventory {
    * @return The {@link Inventory} with the specified page
    */
   public Inventory openInventoryOnPage(int page) {
+    this.inventory.clear();
     int firstPage = 0;
     int lastPage = this.pages.size() - 1;
 

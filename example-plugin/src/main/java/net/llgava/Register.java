@@ -6,6 +6,7 @@ import net.llgava.inventories.NeelixPaginatedInventory;
 import net.llgava.inventories.NeelixPaginatedNavigation;
 import net.llgava.items.BaseItem;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class Register {
 
   public static void inventories() {
     Neelix.getInventoryManager().registerInventory(
-      new NeelixPaginatedInventory(54, "Minecraft Items", LOCKED_SLOTS, ITEMS, new NeelixPaginatedNavigation())
+      new NeelixPaginatedInventory(54, "Minecraft Items", null, ITEMS, new NeelixPaginatedNavigation())
     );
   }
 
@@ -33,7 +34,7 @@ public class Register {
     for (Material material : Material.values()) {
       if (material.isItem() && !material.isAir()) {
         ITEMS.add(
-          new BaseItem(new org.bukkit.inventory.ItemStack(material))
+          new BaseItem(new ItemStack(material))
         );
       }
     }
