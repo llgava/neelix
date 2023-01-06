@@ -2,10 +2,13 @@ package net.llgava.inventories;
 
 
 import lombok.Getter;
+import net.llgava.utils.NeelixMessages;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static net.llgava.Neelix.*;
 
 public class NeelixSimpleInventory extends NeelixInventory {
   @Getter NeelixInventoryType type = NeelixInventoryType.SIMPLE;
@@ -18,12 +21,15 @@ public class NeelixSimpleInventory extends NeelixInventory {
 
   @Override
   protected void mountInventory() {
-    Map<Integer, NeelixInventoryItem> items = new HashMap<>();
-
     for (NeelixInventoryItem inventoryItem : this.items) {
       this.skipLockedSlots();
 
-      if (this.currentSlot > this.size - 1) { return; }
+      if (this.currentSlot > this.size - 1) {
+        getNeelixLogger().warning(
+          NeelixMessages.INVENTORY_ITEMS_LIMIT_REACHED.getMessage().replace("{1}", this.title)
+        );
+        break;
+      }
 
       this.parsedItem.put(this.currentSlot, inventoryItem);
       this.inventory.setItem(this.currentSlot, inventoryItem.getItem());

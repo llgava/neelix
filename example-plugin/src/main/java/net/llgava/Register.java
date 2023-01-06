@@ -36,8 +36,6 @@ public class Register {
     Neelix.getInventoryManager().registerInventory(
       new NeelixSimpleInventory(54, "Minecraft Items Simple", LOCKED_SLOTS, ITEMS)
     );
-
-    Bukkit.getConsoleSender().sendMessage(String.valueOf(Neelix.getInventoryManager().getInventories()));
   }
 
   public static void items() {
