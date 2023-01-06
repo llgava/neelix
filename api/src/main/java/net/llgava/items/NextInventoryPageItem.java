@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 public class NextInventoryPageItem extends NeelixInventoryItem {
   @Getter private final int slot;
 
-  public NextInventoryPageItem(int slot, org.bukkit.inventory.ItemStack item) {
+  public NextInventoryPageItem(int slot, ItemStack item) {
     super(item);
     this.slot = slot;
   }
