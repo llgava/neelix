@@ -9,8 +9,8 @@
 + Add custom inventories handler.
 + Add a `Neelix#initialize(JavaPlugin plugin)` to set up Neelix configurations.
 + Add `Creating Custom Inventories` section on wiki.
++ Add an [Example Plugin](https://github.com/llgava/neelix/tree/main/example-plugin) module.
 
 ### **Changes**
-+ Created an [Example Plugin](https://github.com/llgava/neelix/tree/main/example-plugin) module.
 + All the Neelix source code is located at [api](https://github.com/llgava/neelix/tree/main/api) module.
 + Update java docs.
