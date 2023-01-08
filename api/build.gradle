@@ -4,20 +4,15 @@ plugins {
 }
 
 group = 'net.llgava'
-version = '0.0.1-SNAPSHOT'
-description = 'Neelix'
-String mc_version = "1.13"
+version = '1.0.0'
+description = 'A Java library to avoid repetitive work while developing Minecraft Spigot/Paper plugins.'
+String mc_version = '1.13'
 
 processResources.filesMatching('plugin.yml') {
-  expand(project_version: project.version) // Automatically updates plugin versioning against project.version.
+  expand(project_version: project.version)
 }
 
-/** TESTS **/
-test {
-  useJUnit()
-}
-
-/* COMPILE CONFIGURATION */
+// Configuration
 project.gradle.projectsEvaluated {
   allprojects {
     java.toolchain.languageVersion = JavaLanguageVersion.of(8)
@@ -35,42 +30,15 @@ project.gradle.projectsEvaluated {
       // Spigot
       compileOnly "org.spigotmc:spigot-api:${mc_version}-R0.1-SNAPSHOT"
 
-      implementation 'org.jetbrains:annotations:20.1.0'
-
       // Lombok
       compileOnly "org.projectlombok:lombok:1.18.24"
       annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
-      // JUnit
+      // Others
+      implementation 'org.jetbrains:annotations:20.1.0'
       testImplementation 'junit:junit:4.13'
     }
   }
 }
 
-/* PUBLISHING CONFIGURATION */
-afterEvaluate {
-  apply plugin: 'maven-publish'
-  publishing {
-    publications {
-      maven(MavenPublication) {
-        artifact("build/libs/neelix-${project.version}.jar") {
-          extension 'jar'
-        }
-      }
-    }
-
-    repositories {
-      maven {
-        version = project.version
-
-        name = 'releases'
-        credentials(PasswordCredentials)
-        allowInsecureProtocol = true
-        url = uri('http://localhost:8081/repository/releases/')
-      }
-    }
-  }
-}
-
-dependencies {
-}
+test { useJUnit() }
