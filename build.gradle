@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'net.llgava'
-version = '1.0.0'
+version = '1.0.1'
 description = 'A Java library to avoid repetitive work while developing Minecraft Spigot/Paper plugins.'
 String mc_version = '1.13'
 
