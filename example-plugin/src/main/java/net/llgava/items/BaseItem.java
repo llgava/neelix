@@ -10,6 +10,10 @@ public class BaseItem extends NeelixInventoryItem {
     super(item);
   }
 
+  public BaseItem(Integer slot, ItemStack item) {
+    super(slot, item);
+  }
+
   @Override
   public void onClick(NeelixInventory inventory, Player whoClicked, int clickedSlot, ItemStack clickedItem) {
     whoClicked.getInventory().addItem(clickedItem);

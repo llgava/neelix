@@ -28,12 +28,13 @@ public class NeelixInventoryHandler implements Listener {
 
     if (inventory.isPaginatedInventory()) {
       NeelixPaginatedInventory paginatedInventory = (NeelixPaginatedInventory) inventory;
-      clickedItem = paginatedInventory.getPages().get(paginatedInventory.getCurrentOpenedPage()).get(clickedSlot);
+      clickedItem = paginatedInventory.getPages().get(paginatedInventory.getCurrentlyOpenPage()).get(clickedSlot);
     }
 
     if (clickedItem == null) { return; }
-    clickedItem.onClick(inventory, player, clickedSlot, clickedItem.getItem());
 
     event.setCancelled(true);
+
+    clickedItem.onClick(inventory, player, clickedSlot, clickedItem.getItem());
   }
 }

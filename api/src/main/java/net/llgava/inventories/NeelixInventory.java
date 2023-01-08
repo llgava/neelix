@@ -27,7 +27,7 @@ public abstract class NeelixInventory {
     this.inventory = Bukkit.createInventory(null, this.size, this.title);
   }
 
-  protected abstract void mountInventory();
+  protected abstract void mount();
 
   /** Avoid locked slots. */
   protected void skipLockedSlots() {
