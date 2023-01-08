@@ -27,6 +27,7 @@ public class NeelixPaginatedNavigation {
     this.previousNavigationItem = previous;
   }
 
+  /** @return A list with the slots to be locked. */
   public List<Integer> asLockedSlots() {
     List<Integer> list = new ArrayList<>();
     list.add(this.nextNavigationItem.getSlot());
@@ -35,6 +36,7 @@ public class NeelixPaginatedNavigation {
     return list;
   }
 
+  /** @return A default ItemStack. */
   private static ItemStack defaultNavigationItem(String name) {
     ItemStack item = new ItemStack(Material.ARROW);
     ItemMeta meta = item.getItemMeta();

@@ -1,6 +1,7 @@
 package net.llgava.inventories;
 
 import lombok.Getter;
+import net.llgava.utils.NeelixInventoryType;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.Nullable;
@@ -27,6 +28,7 @@ public abstract class NeelixInventory {
     this.inventory = Bukkit.createInventory(null, this.size, this.title);
   }
 
+  /** Main method which should contain all the logic to build the inventory with items. */
   protected abstract void mount();
 
   /** Avoid locked slots. */

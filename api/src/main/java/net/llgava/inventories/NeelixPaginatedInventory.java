@@ -1,7 +1,7 @@
 package net.llgava.inventories;
 
-
 import lombok.Getter;
+import net.llgava.utils.NeelixInventoryType;
 import net.llgava.utils.NeelixMessages;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -70,14 +70,15 @@ public class NeelixPaginatedInventory extends NeelixInventory {
     this.pages.put(page, pageItems);
   }
 
-  private void putNavigationItems(Map<Integer, NeelixInventoryItem> currentPageItems) {
-    currentPageItems.put(this.navigation.getNextNavigationItem().getSlot(), this.navigation.getNextNavigationItem());
-    currentPageItems.put(this.navigation.getPreviousNavigationItem().getSlot(), this.navigation.getPreviousNavigationItem());
-  }
-
   /** @return The max number of items that should be listed on available slots */
   public int getMaxItemsPerPage() {
     return this.size - this.lockedSlots.size();
+  }
+
+  /** Add navigation items to the current inventory. */
+  private void putNavigationItems(Map<Integer, NeelixInventoryItem> currentPageItems) {
+    currentPageItems.put(this.navigation.getNextNavigationItem().getSlot(), this.navigation.getNextNavigationItem());
+    currentPageItems.put(this.navigation.getPreviousNavigationItem().getSlot(), this.navigation.getPreviousNavigationItem());
   }
 
   /**
@@ -100,11 +101,13 @@ public class NeelixPaginatedInventory extends NeelixInventory {
     return this.inventory;
   }
 
+  /** Open the current inventory one page forward. */
   public void openInventoryOnNextPage(Player player) {
     this.currentlyOpenPage = this.currentlyOpenPage + 1;
     player.openInventory(this.openInventoryOnPage(this.currentlyOpenPage));
   }
 
+  /** Open the current inventory one page back. */
   public void openInventoryOnPreviousPage(Player player) {
     this.currentlyOpenPage = this.currentlyOpenPage - 1;
     player.openInventory(this.openInventoryOnPage(this.currentlyOpenPage));

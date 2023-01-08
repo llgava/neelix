@@ -1,7 +1,6 @@
 package net.llgava.inventories;
 
 import lombok.Getter;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -23,9 +22,12 @@ public abstract class NeelixInventoryItem {
     this.identifier = UUID.randomUUID();
   }
 
-  public Material getType() {
-    return this.item.getType();
-  }
-
+  /**
+   * Logic to be triggered when clicked at this item.
+   * @param inventory The opened inventory
+   * @param whoClicked A Player instance of who clicked at the item
+   * @param clickedSlot The clicked slot
+   * @param clickedItem The clicked item
+   */
   public abstract void onClick(NeelixInventory inventory, Player whoClicked, int clickedSlot, ItemStack clickedItem);
 }

@@ -29,7 +29,7 @@ public class Register {
 
   public static void inventories() {
     Neelix.getInventoryManager().registerInventory(
-      new NeelixPaginatedInventory(54, "Minecraft Items", LOCKED_SLOTS, ITEMS, new NeelixPaginatedNavigation())
+      new NeelixPaginatedInventory(54, "Minecraft Items Paginated", LOCKED_SLOTS, ITEMS, new NeelixPaginatedNavigation())
     );
 
     Neelix.getInventoryManager().registerInventory(
@@ -38,22 +38,9 @@ public class Register {
   }
 
   public static void items() {
-    ITEMS.add(new BaseItem(13, new ItemStack(Material.DIAMOND_AXE)));
-
-    int i = 0;
     for (Material material : Material.values()) {
       if (material.isItem() && !material.isAir()) {
-        i++;
-
-        if (i == 70) {
-          ITEMS.add(new BaseItem(30, new ItemStack(Material.FEATHER)));
-        } else if (i == 71) {
-          ITEMS.add(new BaseItem(0, new ItemStack(Material.BAKED_POTATO)));
-        } else if (i == 120) {
-          ITEMS.add(new BaseItem(42, new ItemStack(Material.SPECTRAL_ARROW)));
-        } else {
-          ITEMS.add(new BaseItem(new ItemStack(material)));
-        }
+        ITEMS.add(new BaseItem(new ItemStack(material)));
       }
     }
   }

@@ -2,6 +2,7 @@ package net.llgava.inventories;
 
 
 import lombok.Getter;
+import net.llgava.utils.NeelixInventoryType;
 import net.llgava.utils.NeelixMessages;
 
 import java.util.HashMap;
@@ -22,8 +23,16 @@ public class NeelixSimpleInventory extends NeelixInventory {
   @Override
   protected void mount() {
     for (NeelixInventoryItem inventoryItem : this.items) {
-      // Use the configured slot
       if (inventoryItem.getSlot() != null) {
+        if (this.lockedSlots.contains(inventoryItem.getSlot())) {
+          getNeelixLogger().warning(
+            NeelixMessages.INVENTORY_ITEM_SLOT_IS_LOCKED.getMessage()
+              .replace("{1}", String.valueOf(inventoryItem.getItem().getType()))
+          );
+
+          continue;
+        }
+
         this.parsedItem.put(inventoryItem.getSlot(), inventoryItem);
         this.inventory.setItem(inventoryItem.getSlot(), inventoryItem.getItem());
 

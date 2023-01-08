@@ -40,7 +40,7 @@ public abstract class CustomConfig {
     }
   }
 
-  /** @return The builded config file. */
+  /** @return The built config file. */
   public abstract CustomConfig build();
 
   /** @return True if the file was saved. */
