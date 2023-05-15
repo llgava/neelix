@@ -4,6 +4,8 @@ package net.llgava.inventories;
 import lombok.Getter;
 import net.llgava.utils.NeelixInventoryType;
 import net.llgava.utils.NeelixMessages;
+import org.bukkit.Bukkit;
+import org.bukkit.inventory.Inventory;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +27,7 @@ public class NeelixSimpleInventory extends NeelixInventory {
     for (NeelixInventoryItem inventoryItem : this.items) {
       if (inventoryItem.getSlot() != null) {
         if (this.lockedSlots.contains(inventoryItem.getSlot())) {
-          getNeelixLogger().warning(
+          Bukkit.getServer().getLogger().warning(
             NeelixMessages.INVENTORY_ITEM_SLOT_IS_LOCKED.getMessage()
               .replace("{1}", String.valueOf(inventoryItem.getItem().getType()))
           );
@@ -46,7 +48,7 @@ public class NeelixSimpleInventory extends NeelixInventory {
       this.skipLockedSlots();
 
       if (this.currentSlot > this.size - 1) {
-        getNeelixLogger().warning(
+        Bukkit.getServer().getLogger().warning(
           NeelixMessages.INVENTORY_ITEMS_LIMIT_REACHED.getMessage()
             .replace("{1}", this.title)
         );
@@ -58,4 +60,7 @@ public class NeelixSimpleInventory extends NeelixInventory {
       this.currentSlot++;
     }
   }
+
+  @Override
+  public Inventory getInventory() { return this.inventory; }
 }

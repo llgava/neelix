@@ -14,7 +14,7 @@ public abstract class NeelixInventory {
   @Getter protected final String title;
   @Getter protected List<Integer> lockedSlots;
   @Getter protected final List<NeelixInventoryItem> items;
-  @Getter protected final Inventory inventory;
+  protected final Inventory inventory;
   @Getter protected final NeelixInventoryType type = NeelixInventoryType.NONE;
 
   protected int currentSlot;
@@ -31,6 +31,9 @@ public abstract class NeelixInventory {
   /** Main method which should contain all the logic to build the inventory with items. */
   protected abstract void mount();
 
+  /** Returns the {@link Inventory}. */
+  protected abstract Inventory getInventory();
+
   /** Avoid locked slots. */
   protected void skipLockedSlots() {
     if(this.lockedSlots.contains(this.currentSlot)) {
@@ -41,7 +44,5 @@ public abstract class NeelixInventory {
   }
 
   public boolean isSimpleInventory() { return this instanceof NeelixSimpleInventory; }
-  public boolean isPaginatedInventory() {
-    return this instanceof NeelixPaginatedInventory;
-  }
+  public boolean isPaginatedInventory() { return this instanceof NeelixPaginatedInventory; }
 }

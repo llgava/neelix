@@ -1,6 +1,7 @@
-package net.llgava;
+package net.llgava.inventories;
 
 import lombok.Getter;
+import net.llgava.events.NeelixInventoryHandler;
 import net.llgava.inventories.NeelixInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,6 +16,9 @@ public class NeelixInventoryManager {
 
   public NeelixInventoryManager(JavaPlugin plugin) {
     this.pluginInstance = plugin;
+
+    // Register the NeelixHandlerEvent
+    this.pluginInstance.getServer().getPluginManager().registerEvents(new NeelixInventoryHandler(this), this.pluginInstance);
   }
 
   /**

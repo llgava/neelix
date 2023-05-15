@@ -28,10 +28,10 @@ public class NeelixPaginatedNavigation {
   }
 
   /** @return A list with the slots to be locked. */
-  public List<Integer> asLockedSlots() {
+  public List<Integer> lockSlots() {
     List<Integer> list = new ArrayList<>();
-    list.add(this.nextNavigationItem.getSlot());
     list.add(this.previousNavigationItem.getSlot());
+    list.add(this.nextNavigationItem.getSlot());
 
     return list;
   }

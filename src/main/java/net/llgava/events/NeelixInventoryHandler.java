@@ -1,6 +1,6 @@
 package net.llgava.events;
 
-import net.llgava.Neelix;
+import net.llgava.inventories.NeelixInventoryManager;
 import net.llgava.inventories.NeelixInventory;
 import net.llgava.inventories.NeelixInventoryItem;
 import net.llgava.inventories.NeelixPaginatedInventory;
@@ -11,12 +11,17 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class NeelixInventoryHandler implements Listener {
+  private final NeelixInventoryManager inventoryManager;
+
+  public NeelixInventoryHandler(NeelixInventoryManager inventoryManager) {
+    this.inventoryManager = inventoryManager;
+  }
 
   @EventHandler
   public void handler(InventoryClickEvent event) {
     Player player = (Player) event.getView().getPlayer();
     int clickedSlot = event.getRawSlot();
-    NeelixInventory inventory = Neelix.getInventoryManager().getInventoryByTitle(event.getView().getTitle());
+    NeelixInventory inventory = this.inventoryManager.getInventoryByTitle(event.getView().getTitle());
     NeelixInventoryItem clickedItem = null;
 
     if (inventory == null) { return; }
