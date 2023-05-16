@@ -1,7 +1,6 @@
 package net.llgava.items;
 
 import net.llgava.inventories.NeelixInventory;
-import net.llgava.inventories.NeelixInventoryItem;
 import net.llgava.inventories.NeelixPaginatedInventory;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

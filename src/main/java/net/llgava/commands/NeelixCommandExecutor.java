@@ -5,12 +5,17 @@ import net.llgava.utils.NeelixSubcommandFailType;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This executor is not a substitute for {@link CommandExecutor} or {@link TabExecutor}! <br />
+ * Should be used only for {@link NeelixSubcommand} architecture.
+ * */
 public class NeelixCommandExecutor implements TabExecutor {
   private static final ArrayList<String> EMPTY_TAB_COMPLETER = new ArrayList<>();
 

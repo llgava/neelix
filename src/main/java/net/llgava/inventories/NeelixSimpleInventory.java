@@ -2,20 +2,16 @@ package net.llgava.inventories;
 
 
 import lombok.Getter;
+import net.llgava.items.NeelixInventoryItem;
 import net.llgava.utils.NeelixInventoryType;
 import net.llgava.utils.NeelixMessages;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import static net.llgava.Neelix.*;
 
 public class NeelixSimpleInventory extends NeelixInventory {
-  @Getter NeelixInventoryType type = NeelixInventoryType.SIMPLE;
-  @Getter Map<Integer, NeelixInventoryItem> parsedItem = new HashMap<>();
+  @Getter private final NeelixInventoryType type = NeelixInventoryType.SIMPLE;
 
   public NeelixSimpleInventory(int size, String title, List<Integer> lockedSlots, List<NeelixInventoryItem> items) {
     super(size, title, lockedSlots, items);
@@ -24,39 +20,36 @@ public class NeelixSimpleInventory extends NeelixInventory {
 
   @Override
   protected void mount() {
-    for (NeelixInventoryItem inventoryItem : this.items) {
-      if (inventoryItem.getSlot() != null) {
-        if (this.lockedSlots.contains(inventoryItem.getSlot())) {
-          Bukkit.getServer().getLogger().warning(
-            NeelixMessages.INVENTORY_ITEM_SLOT_IS_LOCKED.getMessage()
-              .replace("{1}", String.valueOf(inventoryItem.getItem().getType()))
-          );
+    for (NeelixInventoryItem item : this.items) {
 
-          continue;
-        }
-
-        this.parsedItem.put(inventoryItem.getSlot(), inventoryItem);
-        this.inventory.setItem(inventoryItem.getSlot(), inventoryItem.getItem());
-
-        if (!this.lockedSlots.contains(inventoryItem.getSlot())) {
-          this.lockedSlots.add(inventoryItem.getSlot());
-        }
-
-        continue;
-      }
-
-      this.skipLockedSlots();
-
+      // Inventory items limit
       if (this.currentSlot > this.size - 1) {
         Bukkit.getServer().getLogger().warning(
           NeelixMessages.INVENTORY_ITEMS_LIMIT_REACHED.getMessage()
             .replace("{1}", this.title)
         );
+
         break;
       }
 
-      this.parsedItem.put(this.currentSlot, inventoryItem);
-      this.inventory.setItem(this.currentSlot, inventoryItem.getItem());
+      // Item with non-null slot value
+      if (item.getSlot() != null) {
+        if (this.lockedSlots.contains(item.getSlot())) {
+          Bukkit.getServer().getLogger().warning(
+            NeelixMessages.INVENTORY_ITEM_SLOT_IS_LOCKED.getMessage()
+              .replace("{1}", String.valueOf(item.getItem().getType()))
+          );
+
+          continue;
+        }
+
+        this.inventory.setItem(item.getSlot(), item.getItem());
+        this.lockedSlots.add(item.getSlot());
+      }
+
+      // Item with null slot value
+      this.skipLockedSlots();
+      this.inventory.setItem(this.currentSlot, item.getItem());
       this.currentSlot++;
     }
   }

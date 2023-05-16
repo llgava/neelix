@@ -1,8 +1,10 @@
 package net.llgava.inventories;
 
 import lombok.Getter;
+import net.llgava.items.NeelixInventoryItem;
 import net.llgava.utils.NeelixInventoryType;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,6 +35,9 @@ public abstract class NeelixInventory {
 
   /** Returns the {@link Inventory}. */
   protected abstract Inventory getInventory();
+
+  /** Reload all the inventory items */
+  public void reload() { this.mount(); }
 
   /** Avoid locked slots. */
   protected void skipLockedSlots() {

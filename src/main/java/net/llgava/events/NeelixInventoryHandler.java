@@ -2,7 +2,7 @@ package net.llgava.events;
 
 import net.llgava.inventories.NeelixInventoryManager;
 import net.llgava.inventories.NeelixInventory;
-import net.llgava.inventories.NeelixInventoryItem;
+import net.llgava.items.NeelixInventoryItem;
 import net.llgava.inventories.NeelixPaginatedInventory;
 import net.llgava.inventories.NeelixSimpleInventory;
 import org.bukkit.entity.Player;
@@ -28,12 +28,12 @@ public class NeelixInventoryHandler implements Listener {
 
     if (inventory.isSimpleInventory()) {
       NeelixSimpleInventory simpleInventory = (NeelixSimpleInventory) inventory;
-      clickedItem = simpleInventory.getParsedItem().get(clickedSlot);
+      clickedItem = simpleInventory.getInventoryItems().get(clickedSlot);
     }
 
     if (inventory.isPaginatedInventory()) {
       NeelixPaginatedInventory paginatedInventory = (NeelixPaginatedInventory) inventory;
-      clickedItem = paginatedInventory.getPages().get(paginatedInventory.getCurrentlyOpenPage()).get(clickedSlot);
+      clickedItem = paginatedInventory.getPages().get(paginatedInventory.getOpenedPage()).get(clickedSlot);
     }
 
     if (clickedItem == null) { return; }

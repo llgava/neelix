@@ -1,6 +1,7 @@
 package net.llgava.inventories;
 
 import lombok.Getter;
+import net.llgava.items.NeelixInventoryItem;
 import net.llgava.utils.NeelixInventoryType;
 import net.llgava.utils.NeelixMessages;
 import org.bukkit.Bukkit;
@@ -10,25 +11,20 @@ import org.bukkit.inventory.Inventory;
 import java.util.*;
 
 public class NeelixPaginatedInventory extends NeelixInventory {
-  @Getter private final NeelixPaginatedNavigation navigation;
-  @Getter NeelixInventoryType type = NeelixInventoryType.PAGINATED;
-
+  @Getter private int openedPage = 0;
   @Getter private final Map<Integer, Map<Integer, NeelixInventoryItem>> pages = new HashMap<>(); // <page, <slot, item>>
-
-  @Getter private int currentlyOpenPage = 0;
+  @Getter private final NeelixPaginatedNavigation navigation;
+  @Getter private final NeelixInventoryType type = NeelixInventoryType.PAGINATED;
 
   public NeelixPaginatedInventory(int size, String title, List<Integer> lockedSlots, List<NeelixInventoryItem> items, NeelixPaginatedNavigation navigation) {
     super(size, title, lockedSlots, items);
     this.navigation = navigation;
     this.lockedSlots.addAll(this.navigation.lockSlots());
-    //this.mergeNavigationItems();
-
     this.mount();
   }
 
   @Override
   protected void mount() {
-
     int page = 0;
     ArrayList<Integer> pageLockedSlots = new ArrayList<>();
     HashMap<Integer, NeelixInventoryItem> items = new HashMap<>();
@@ -36,6 +32,7 @@ public class NeelixPaginatedInventory extends NeelixInventory {
     for (NeelixInventoryItem item : this.items) {
       boolean isLastItem = this.items.indexOf(item) == this.items.size();
 
+      // Page items limit
       if (items.size() >= this.getMaxItemsPerPage() || isLastItem) {
         this.putNavigationItems(items);
         this.pages.put(page, items);
@@ -46,6 +43,7 @@ public class NeelixPaginatedInventory extends NeelixInventory {
         pageLockedSlots = new ArrayList<>();
       }
 
+      // Items with non-null slot value
       if (item.getSlot() != null) {
         if (this.lockedSlots.contains(item.getSlot()) || pageLockedSlots.contains(item.getSlot())) {
           Bukkit.getServer().getLogger().warning(
@@ -85,10 +83,6 @@ public class NeelixPaginatedInventory extends NeelixInventory {
     items.put(this.navigation.getPreviousNavigationItem().getSlot(), this.navigation.getPreviousNavigationItem());
   }
 
-  /** Returns the {@link Inventory} on the first page. */
-  @Override
-  public Inventory getInventory() { return this.openInventoryOnPage(0); }
-
   /**
    * @param page The page to be opened
    * @return The {@link Inventory} with the specified page
@@ -98,11 +92,11 @@ public class NeelixPaginatedInventory extends NeelixInventory {
     int firstPage = 0;
     int lastPage = this.pages.size() - 1;
 
-    if (page <= firstPage) { this.currentlyOpenPage = firstPage; }
-    if (page >= lastPage) { this.currentlyOpenPage = lastPage; }
-    if (!(page <= firstPage) && !(page >= lastPage)) { this.currentlyOpenPage = page; }
+    if (page <= firstPage) { this.openedPage = firstPage; }
+    if (page >= lastPage) { this.openedPage = lastPage; }
+    if (!(page <= firstPage) && !(page >= lastPage)) { this.openedPage = page; }
 
-    this.pages.get(this.currentlyOpenPage).forEach((slot, item) -> {
+    this.pages.get(this.openedPage).forEach((slot, item) -> {
       this.inventory.setItem(slot, item.getItem());
     });
 
@@ -111,13 +105,17 @@ public class NeelixPaginatedInventory extends NeelixInventory {
 
   /** Open the current inventory one page forward. */
   public void openInventoryOnNextPage(Player player) {
-    this.currentlyOpenPage = this.currentlyOpenPage + 1;
-    player.openInventory(this.openInventoryOnPage(this.currentlyOpenPage));
+    this.openedPage = this.openedPage + 1;
+    player.openInventory(this.openInventoryOnPage(this.openedPage));
   }
 
   /** Open the current inventory one page back. */
   public void openInventoryOnPreviousPage(Player player) {
-    this.currentlyOpenPage = this.currentlyOpenPage - 1;
-    player.openInventory(this.openInventoryOnPage(this.currentlyOpenPage));
+    this.openedPage = this.openedPage - 1;
+    player.openInventory(this.openInventoryOnPage(this.openedPage));
   }
+
+  /** Returns the {@link Inventory} on the first page. */
+  @Override
+  public Inventory getInventory() { return this.openInventoryOnPage(0); }
 }
