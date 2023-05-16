@@ -8,10 +8,13 @@ import net.llgava.utils.NeelixMessages;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NeelixSimpleInventory extends NeelixInventory {
   @Getter private final NeelixInventoryType type = NeelixInventoryType.SIMPLE;
+  @Getter private final Map<Integer, NeelixInventoryItem> inventoryItems = new HashMap<>();
 
   public NeelixSimpleInventory(int size, String title, List<Integer> lockedSlots, List<NeelixInventoryItem> items) {
     super(size, title, lockedSlots, items);
@@ -43,12 +46,14 @@ public class NeelixSimpleInventory extends NeelixInventory {
           continue;
         }
 
+        this.inventoryItems.put(item.getSlot(), item);
         this.inventory.setItem(item.getSlot(), item.getItem());
         this.lockedSlots.add(item.getSlot());
       }
 
       // Item with null slot value
       this.skipLockedSlots();
+      this.inventoryItems.put(this.currentSlot, item);
       this.inventory.setItem(this.currentSlot, item.getItem());
       this.currentSlot++;
     }
