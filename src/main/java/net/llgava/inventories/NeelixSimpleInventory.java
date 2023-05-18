@@ -61,4 +61,9 @@ public class NeelixSimpleInventory extends NeelixInventory {
 
   @Override
   public Inventory getInventory() { return this.inventory; }
+
+  @Override
+  public NeelixInventoryItem getClickedItem(int clickedSlot) {
+    return this.getInventoryItems().get(clickedSlot);
+  }
 }

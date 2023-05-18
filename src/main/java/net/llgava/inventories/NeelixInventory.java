@@ -4,7 +4,6 @@ import lombok.Getter;
 import net.llgava.items.NeelixInventoryItem;
 import net.llgava.utils.NeelixInventoryType;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,8 +15,8 @@ public abstract class NeelixInventory {
   @Getter protected final String title;
   @Getter protected List<Integer> lockedSlots;
   @Getter protected final List<NeelixInventoryItem> items;
-  protected final Inventory inventory;
   @Getter protected final NeelixInventoryType type = NeelixInventoryType.NONE;
+  protected final Inventory inventory;
 
   protected int currentSlot;
 
@@ -34,7 +33,10 @@ public abstract class NeelixInventory {
   protected abstract void mount();
 
   /** Returns the {@link Inventory}. */
-  protected abstract Inventory getInventory();
+  public abstract Inventory getInventory();
+
+  /** Returns the clicked item by the clicked slot. */
+  public abstract NeelixInventoryItem getClickedItem(int clickedSlot);
 
   /** Reload all the inventory items */
   public void reload() { this.mount(); }
@@ -48,6 +50,6 @@ public abstract class NeelixInventory {
     }
   }
 
-  public boolean isSimpleInventory() { return this instanceof NeelixSimpleInventory; }
-  public boolean isPaginatedInventory() { return this instanceof NeelixPaginatedInventory; }
+  public boolean isSimpleInventory() { return this.getType() == NeelixInventoryType.SIMPLE; }
+  public boolean isPaginatedInventory() { return this.getType() == NeelixInventoryType.PAGINATED; }
 }

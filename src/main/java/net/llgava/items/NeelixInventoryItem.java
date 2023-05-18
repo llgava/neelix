@@ -11,7 +11,7 @@ import java.util.UUID;
 public abstract class NeelixInventoryItem {
   @Getter private final Integer slot;
   @Getter private final ItemStack item;
-  @Getter private final UUID identifier;
+  @Getter private final UUID uuid;
 
   public NeelixInventoryItem(ItemStack item) {
     this(null, item);
@@ -20,7 +20,7 @@ public abstract class NeelixInventoryItem {
   public NeelixInventoryItem(@Nullable Integer slot, ItemStack item) {
     this.slot = slot;
     this.item = item;
-    this.identifier = UUID.randomUUID();
+    this.uuid = UUID.randomUUID();
   }
 
   /**
@@ -31,6 +31,4 @@ public abstract class NeelixInventoryItem {
    * @param clickedItem The clicked item
    */
   public abstract void onClick(NeelixInventory inventory, Player whoClicked, int clickedSlot, ItemStack clickedItem);
-
-  // private void callConfirmationInventory() {}
 }

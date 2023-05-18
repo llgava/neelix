@@ -118,4 +118,9 @@ public class NeelixPaginatedInventory extends NeelixInventory {
   /** Returns the {@link Inventory} on the first page. */
   @Override
   public Inventory getInventory() { return this.openInventoryOnPage(0); }
+
+  @Override
+  public NeelixInventoryItem getClickedItem(int clickedSlot) {
+    return this.getPages().get(this.getOpenedPage()).get(clickedSlot);
+  }
 }

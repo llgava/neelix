@@ -45,6 +45,6 @@ public class CustomJsonConfig extends CustomConfig {
 
   @Override
   public boolean save() {
-    return false;
+    return true;
   }
 }
