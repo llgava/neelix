@@ -49,6 +49,8 @@ public class NeelixSimpleInventory extends NeelixInventory {
         this.inventoryItems.put(item.getSlot(), item);
         this.inventory.setItem(item.getSlot(), item.getItem());
         this.lockedSlots.add(item.getSlot());
+
+        continue;
       }
 
       // Item with null slot value
