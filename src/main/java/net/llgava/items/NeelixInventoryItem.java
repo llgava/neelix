@@ -1,6 +1,7 @@
 package net.llgava.items;
 
 import lombok.Getter;
+import lombok.Setter;
 import net.llgava.inventories.NeelixInventory;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -9,8 +10,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 public abstract class NeelixInventoryItem {
-  @Getter private final Integer slot;
-  @Getter private final ItemStack item;
+  @Getter @Setter private Integer slot;
+  @Getter @Setter private ItemStack item;
   @Getter private final UUID uuid;
 
   public NeelixInventoryItem(ItemStack item) {
