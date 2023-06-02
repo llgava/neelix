@@ -19,7 +19,8 @@ public class NeelixPaginatedInventory extends NeelixInventory {
   public NeelixPaginatedInventory(int size, String title, List<Integer> lockedSlots, List<NeelixInventoryItem> items, NeelixPaginatedNavigation navigation) {
     super(size, title, lockedSlots, items);
     this.navigation = navigation;
-    this.lockedSlots.addAll(this.navigation.lockSlots());
+    this.lockedSlots.addAll(this.navigation.asLockedSlots());
+
     this.mount();
   }
 
@@ -48,7 +49,8 @@ public class NeelixPaginatedInventory extends NeelixInventory {
         if (this.lockedSlots.contains(item.getSlot()) || pageLockedSlots.contains(item.getSlot())) {
           Bukkit.getServer().getLogger().warning(
             NeelixMessages.INVENTORY_ITEM_SLOT_IS_LOCKED.getMessage()
-              .replace("{1}", String.valueOf(item.getItem().getType()))
+              .replace("{1}", String.valueOf(item.getSlot()))
+              .replace("{2}", String.valueOf(item.getItem().getType()))
           );
 
           continue;

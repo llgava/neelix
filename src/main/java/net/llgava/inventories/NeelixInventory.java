@@ -1,6 +1,9 @@
 package net.llgava.inventories;
 
 import lombok.Getter;
+import net.llgava.inventories.handlers.CloseNeelixInventoryHandle;
+import net.llgava.inventories.handlers.FullNeelixInventoryHandle;
+import net.llgava.inventories.handlers.OpenNeelixInventoryHandle;
 import net.llgava.items.NeelixInventoryItem;
 import net.llgava.utils.NeelixInventoryType;
 import org.bukkit.Bukkit;
@@ -16,8 +19,7 @@ public abstract class NeelixInventory {
   @Getter protected List<Integer> lockedSlots;
   @Getter protected final List<NeelixInventoryItem> items;
   @Getter protected final NeelixInventoryType type = NeelixInventoryType.NONE;
-  protected final Inventory inventory;
-
+  protected Inventory inventory;
   protected int currentSlot;
 
   public NeelixInventory(int size, String title, @Nullable List<Integer> lockedSlots, List<NeelixInventoryItem> items) {
@@ -38,8 +40,14 @@ public abstract class NeelixInventory {
   /** Returns the clicked item by the clicked slot. */
   public abstract NeelixInventoryItem getClickedItem(int clickedSlot);
 
-  /** Reload all the inventory items */
-  public void reload() { this.mount(); }
+  public void resetState() {
+    for (NeelixInventoryItem item: this.items) {
+      this.lockedSlots.remove(item.getSlot());
+    }
+
+    this.inventory.clear();
+    this.mount();
+  }
 
   /** Avoid locked slots. */
   protected void skipLockedSlots() {
@@ -49,6 +57,10 @@ public abstract class NeelixInventory {
       } while (this.lockedSlots.contains(this.currentSlot));
     }
   }
+
+  public boolean isFullHandled() { return this instanceof FullNeelixInventoryHandle; }
+  public boolean hasOpenHandled()  { return this instanceof OpenNeelixInventoryHandle; }
+  public boolean hasCloseHandled()  { return this instanceof CloseNeelixInventoryHandle; }
 
   public boolean isSimpleInventory() { return this.getType() == NeelixInventoryType.SIMPLE; }
   public boolean isPaginatedInventory() { return this.getType() == NeelixInventoryType.PAGINATED; }

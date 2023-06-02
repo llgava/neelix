@@ -7,8 +7,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class PreviousInventoryPageItem extends NeelixInventoryItem {
 
-  public PreviousInventoryPageItem(int slot, ItemStack item) {
-    super(slot, item);
+  public PreviousInventoryPageItem(ItemStack item, int slot) {
+    super("previous_page", item, slot);
   }
 
   @Override

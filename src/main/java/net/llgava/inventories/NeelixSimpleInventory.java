@@ -18,6 +18,7 @@ public class NeelixSimpleInventory extends NeelixInventory {
 
   public NeelixSimpleInventory(int size, String title, List<Integer> lockedSlots, List<NeelixInventoryItem> items) {
     super(size, title, lockedSlots, items);
+
     this.mount();
   }
 
@@ -40,7 +41,8 @@ public class NeelixSimpleInventory extends NeelixInventory {
         if (this.lockedSlots.contains(item.getSlot())) {
           Bukkit.getServer().getLogger().warning(
             NeelixMessages.INVENTORY_ITEM_SLOT_IS_LOCKED.getMessage()
-              .replace("{1}", String.valueOf(item.getItem().getType()))
+              .replace("{1}", String.valueOf(item.getSlot()))
+              .replace("{2}", String.valueOf(item.getItem().getType()))
           );
 
           continue;

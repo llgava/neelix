@@ -17,8 +17,8 @@ public class NeelixPaginatedNavigation {
 
   public NeelixPaginatedNavigation() {
     this(
-      new NextInventoryPageItem(8, defaultNavigationItem("Next page")),
-      new PreviousInventoryPageItem(0, defaultNavigationItem("Previous page"))
+      new NextInventoryPageItem(defaultNavigationItem("Next page"), 8),
+      new PreviousInventoryPageItem(defaultNavigationItem("Previous page"), 0)
     );
   }
 
@@ -28,7 +28,7 @@ public class NeelixPaginatedNavigation {
   }
 
   /** @return A list with the slots to be locked. */
-  public List<Integer> lockSlots() {
+  public List<Integer> asLockedSlots() {
     List<Integer> list = new ArrayList<>();
     list.add(this.previousNavigationItem.getSlot());
     list.add(this.nextNavigationItem.getSlot());
