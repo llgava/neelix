@@ -4,6 +4,9 @@ import lombok.Getter;
 import net.llgava.inventories.NeelixPaginatedInventory;
 import net.llgava.inventories.NeelixSimpleInventory;
 
+/**
+ * @deprecated - Use <i>instanceof</i> instead.
+ */
 public enum NeelixInventoryType {
   NONE(0, null),
   SIMPLE(1, NeelixSimpleInventory.class),

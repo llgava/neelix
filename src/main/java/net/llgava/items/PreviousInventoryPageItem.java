@@ -7,6 +7,12 @@ import org.bukkit.inventory.ItemStack;
 
 public class PreviousInventoryPageItem extends NeelixInventoryItem {
 
+  /**
+   * Create a full functional "previous page" inventory item. <br />
+   *
+   * @param item The item to be used as next item.
+   * @param slot The inventory slot the item should be in. This slot will be added to the inventory {@link NeelixInventory#lockedSlots}.
+   */
   public PreviousInventoryPageItem(ItemStack item, int slot) {
     super("previous_page", item, slot);
   }

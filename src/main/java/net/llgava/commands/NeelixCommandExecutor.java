@@ -10,18 +10,20 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.List;
 
-/**
- * This executor is not a substitute for {@link CommandExecutor} or {@link TabExecutor}! <br />
- * Should be used only for {@link NeelixSubcommand} architecture.
- * */
 public class NeelixCommandExecutor implements TabExecutor {
   private static final ArrayList<String> EMPTY_TAB_COMPLETER = new ArrayList<>();
 
   private final String name;
   private final ArrayList<NeelixSubcommand> subcommands;
 
+  /**
+   * This executor is not a substitute for {@link CommandExecutor} or {@link TabExecutor}! <br />
+   * Should be used only for {@link NeelixSubcommand} architecture.
+   *
+   * @param name The command name.
+   * @param subcommands All the subcommands linked to the main command executor.
+   * */
   public NeelixCommandExecutor(String name, ArrayList<NeelixSubcommand> subcommands) {
     this.name = name;
     this.subcommands = subcommands;
@@ -59,7 +61,7 @@ public class NeelixCommandExecutor implements TabExecutor {
   }
 
   @Override
-  public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+  public ArrayList<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
     Player player = (Player) sender;
     ArrayList<String> completes = new ArrayList<>();
 

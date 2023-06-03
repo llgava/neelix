@@ -1,7 +1,6 @@
 package net.llgava.items.generic;
 
 import lombok.Getter;
-import lombok.Setter;
 import net.llgava.inventories.NeelixInventory;
 import net.llgava.items.NeelixInventoryItem;
 import org.bukkit.Material;

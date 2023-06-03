@@ -16,6 +16,15 @@ public class NeelixPaginatedInventory extends NeelixInventory {
   @Getter private final NeelixPaginatedNavigation navigation;
   @Getter private final NeelixInventoryType type = NeelixInventoryType.PAGINATED;
 
+  /**
+   * Create a full functional paginated inventory.
+   *
+   * @param size The size of the inventory.
+   * @param title The title of the inventory.
+   * @param lockedSlots Locked slots cannot allow items in it. If an item is added to a locked slot, it will be ignored.
+   * @param items Items that must be added to the inventory.
+   * @param navigation Items to control the navigation between pages in the inventory.
+   */
   public NeelixPaginatedInventory(int size, String title, List<Integer> lockedSlots, List<NeelixInventoryItem> items, NeelixPaginatedNavigation navigation) {
     super(size, title, lockedSlots, items);
     this.navigation = navigation;
@@ -74,20 +83,24 @@ public class NeelixPaginatedInventory extends NeelixInventory {
     this.pages.put(page, items);
   }
 
-  /** @return The max number of items that should be listed on available slots */
+  /**
+   * @return The max number of items that can be added to the pages.
+   * */
   public int getMaxItemsPerPage() {
     return this.size - this.lockedSlots.size();
   }
 
-  /** Add navigation items to the current inventory. */
+  /**
+   * Add navigation items to the current inventory.
+   * */
   private void putNavigationItems(HashMap<Integer, NeelixInventoryItem> items) {
     items.put(this.navigation.getNextNavigationItem().getSlot(), this.navigation.getNextNavigationItem());
     items.put(this.navigation.getPreviousNavigationItem().getSlot(), this.navigation.getPreviousNavigationItem());
   }
 
   /**
-   * @param page The page to be opened
-   * @return The {@link Inventory} with the specified page
+   * @param page The page to be opened.
+   * @return The {@link Inventory} with the specified page.
    */
   public Inventory openInventoryOnPage(int page) {
     this.inventory.clear();
@@ -105,22 +118,32 @@ public class NeelixPaginatedInventory extends NeelixInventory {
     return this.inventory;
   }
 
-  /** Open the current inventory one page forward. */
+  /**
+   * Open the current inventory one page forward.
+   * */
   public void openInventoryOnNextPage(Player player) {
     this.openedPage = this.openedPage + 1;
     player.openInventory(this.openInventoryOnPage(this.openedPage));
   }
 
-  /** Open the current inventory one page back. */
+  /**
+   * Open the current inventory one page back.
+   * */
   public void openInventoryOnPreviousPage(Player player) {
     this.openedPage = this.openedPage - 1;
     player.openInventory(this.openInventoryOnPage(this.openedPage));
   }
 
-  /** Returns the {@link Inventory} on the first page. */
+  /**
+   * @return The inventory on the first page.
+   * */
   @Override
   public Inventory getInventory() { return this.openInventoryOnPage(0); }
 
+  /**
+   * @param clickedSlot The clicked slot on the inventory.
+   * @return The clicked item by the clicked slot.
+   */
   @Override
   public NeelixInventoryItem getClickedItem(int clickedSlot) {
     return this.getPages().get(this.getOpenedPage()).get(clickedSlot);

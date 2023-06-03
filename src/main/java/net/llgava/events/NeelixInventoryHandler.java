@@ -1,6 +1,7 @@
 package net.llgava.events;
 
-import net.llgava.inventories.*;
+import net.llgava.inventories.NeelixInventory;
+import net.llgava.inventories.NeelixInventoryManager;
 import net.llgava.inventories.handlers.CloseNeelixInventoryHandle;
 import net.llgava.inventories.handlers.OpenNeelixInventoryHandle;
 import net.llgava.items.NeelixInventoryItem;
@@ -14,6 +15,12 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 public class NeelixInventoryHandler implements Listener {
   private final NeelixInventoryManager inventoryManager;
 
+  /**
+   * <b>NEELIX'S INTERNAL USE</b> <br />
+   * This listener is used internally for Neelix. <b>DO NOT</b> re-register on your plugin.
+   *
+   * @param inventoryManager The manager responsive to control all Neelix inventories.
+   * */
   public NeelixInventoryHandler(NeelixInventoryManager inventoryManager) {
     this.inventoryManager = inventoryManager;
   }

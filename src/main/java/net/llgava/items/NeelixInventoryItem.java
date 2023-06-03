@@ -3,15 +3,11 @@ package net.llgava.items;
 import lombok.Getter;
 import lombok.Setter;
 import net.llgava.inventories.NeelixInventory;
-import net.llgava.utils.NeelixMessages;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 

@@ -2,15 +2,23 @@ package net.llgava.utils;
 
 import org.bukkit.ChatColor;
 
+/**
+ * <b>NEELIX'S INTERNAL USE</b> <br />
+ * An enum containing all standard and recommended Neelix values.
+ * */
 public enum NeelixDefaultValues {
-  DEFAULT_TRUE_STACK_TITLE("Enabled"),
-  DEFAULT_FALSE_STACK_TITLE("Disabled");
+  NEXT_STACK_TITLE("Next page"),
+  PREVIOUS_STACK_TITLE("Previous page"),
+  NEXT_STACK_SLOT(8),
+  PREVIOUS_STACK_SLOT(0),
+  TRUE_STACK_TITLE("Enabled"),
+  FALSE_STACK_TITLE("Disabled");
 
   private final String value;
 
-  NeelixDefaultValues(String value) {
-    this.value = value;
-  }
+  NeelixDefaultValues(String value) { this.value = value; }
+  NeelixDefaultValues(Integer value) { this.value = value.toString(); }
+  NeelixDefaultValues(Boolean value) { this.value = value.toString(); }
 
   public static NeelixDefaultValues findByIndex(int index) {
     for (NeelixDefaultValues value : NeelixDefaultValues.values()) {
@@ -22,7 +30,15 @@ public enum NeelixDefaultValues {
     return null;
   }
 
-  public String getValue() {
+  public String getString() {
     return ChatColor.RESET + this.value;
+  }
+
+  public int getInt() {
+    return Integer.parseInt(this.value);
+  }
+
+  public boolean getBoolean() {
+    return Boolean.parseBoolean(this.value);
   }
 }

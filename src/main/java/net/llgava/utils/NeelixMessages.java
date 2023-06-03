@@ -2,6 +2,10 @@ package net.llgava.utils;
 
 import lombok.Getter;
 
+/**
+ * <b>NEELIX'S INTERNAL USE</b> <br />
+ * An enum containing all messages from Neelix.
+ * */
 public enum NeelixMessages {
   INVALID_FILE_EXTENSION("The file doesn't have a valid extension. Please, use {1}."),
   SUBCOMMAND_PERMISSION_CANNOT_BE_NULL("Permission cannot be null, use empty string instead."),

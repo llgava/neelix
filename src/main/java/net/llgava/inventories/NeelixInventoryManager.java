@@ -2,7 +2,6 @@ package net.llgava.inventories;
 
 import lombok.Getter;
 import net.llgava.events.NeelixInventoryHandler;
-import net.llgava.inventories.NeelixInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,11 +13,16 @@ public class NeelixInventoryManager {
 
   private final JavaPlugin pluginInstance;
 
+  /**
+   * An instance of inventories manager.
+   * @param plugin The instance of the plugin.
+   */
   public NeelixInventoryManager(JavaPlugin plugin) {
     this.pluginInstance = plugin;
 
-    // Register the NeelixHandlerEvent
-    this.pluginInstance.getServer().getPluginManager().registerEvents(new NeelixInventoryHandler(this), this.pluginInstance);
+    this.pluginInstance.getServer().getPluginManager().registerEvents(
+      new NeelixInventoryHandler(this), this.pluginInstance
+    );
   }
 
   /**
@@ -33,17 +37,17 @@ public class NeelixInventoryManager {
 
   /**
    * Removes an inventory by the title.
-   * @param value The inventory title
-   */
+   * @param value The inventory title.
+   * */
   public void removeInventoryByTitle(String value) {
     NeelixInventory inventory = this.getInventoryByTitle(value);
     this.inventories.remove(inventory);
   }
 
   /**
-   * @param value The inventory title
+   * @param value The inventory title.
    * @return An inventory by the title.
-   */
+   * */
   public NeelixInventory getInventoryByTitle(String value) {
     for (NeelixInventory inventory : this.inventories) {
       if (inventory.getTitle().equals(value)) {

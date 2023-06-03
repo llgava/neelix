@@ -15,6 +15,7 @@ public abstract class CustomConfig {
 
   /**
    * Creates a new configuration file.
+   *
    * @param plugin The main class of the plugin.
    * @param name The name of the config file. (Should be the same name as the file in src/main/resources)
    * @param copyDefaults If true, all values in the default config file will be copied every time when the server is started.
@@ -26,26 +27,38 @@ public abstract class CustomConfig {
     this.dataFolder = plugin.getDataFolder();
   }
 
-  /** You can use {@link CustomYamlConfig} instead static class. */
+  /**
+   * You can use {@link CustomYamlConfig} instead static class.
+   * */
   public static class YAML extends CustomYamlConfig {
     public YAML(JavaPlugin plugin, String name, boolean copyDefaults) {
       super(plugin, name, copyDefaults);
     }
   }
 
-  /** You can use {@link CustomJsonConfig} instead static class. */
+  /**
+   * You can use {@link CustomJsonConfig} instead static class.
+   * */
   public static class JSON extends CustomJsonConfig {
     public JSON(JavaPlugin plugin, String name, boolean copyDefaults) {
       super(plugin, name, copyDefaults);
     }
   }
 
-  /** @return The built config file. */
+  /**
+   * @return The built config file.
+   * */
   public abstract CustomConfig build();
 
-  /** @return True if the file was saved. */
+  /**
+   * @return True if the file was saved.
+   * */
   public abstract boolean save();
 
+  /**
+   * @param extension The extension to be checked.
+   * @return If the checked extension is the same from the file name.
+   */
   protected boolean isValidExtension(String extension) {
     if(!this.name.endsWith(extension)) {
       throw new Error(
