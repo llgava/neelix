@@ -5,12 +5,10 @@ import net.llgava.inventories.handlers.OpenNeelixInventoryHandle;
 import net.llgava.inventories.handlers.CloseNeelixInventoryHandle;
 import net.llgava.inventories.handlers.FullNeelixInventoryHandle;
 import net.llgava.items.NeelixInventoryItem;
-import net.llgava.utils.NeelixInventoryType;
 import net.llgava.utils.NeelixMessages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -21,7 +19,6 @@ public abstract class NeelixInventory {
   @Getter protected final String title;
   @Getter protected List<Integer> lockedSlots;
   @Getter protected final List<NeelixInventoryItem> items;
-  @Getter protected final NeelixInventoryType type = NeelixInventoryType.NONE;
   protected Inventory inventory;
   protected int currentSlot;
 
@@ -154,16 +151,4 @@ public abstract class NeelixInventory {
    * @return If the inventory is an instance of close handled inventory.
    */
   public boolean hasCloseHandled()  { return this instanceof CloseNeelixInventoryHandle; }
-
-  /**
-   * @deprecated - Use <i>instanceof</i> instead.
-   * @return If the inventory is an instance of simple inventory.
-   */
-  public boolean isSimpleInventory() { return this.getType() == NeelixInventoryType.SIMPLE; }
-
-  /**
-   * @deprecated - Use <i>instanceof</i> instead.
-   * @return If the inventory is an instance of paginated inventory.
-   */
-  public boolean isPaginatedInventory() { return this.getType() == NeelixInventoryType.PAGINATED; }
 }

@@ -2,7 +2,6 @@ package net.llgava.inventories;
 
 import lombok.Getter;
 import net.llgava.items.NeelixInventoryItem;
-import net.llgava.utils.NeelixInventoryType;
 import net.llgava.utils.NeelixMessages;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -14,7 +13,6 @@ public class NeelixPaginatedInventory extends NeelixInventory {
   @Getter private int openedPage = 0;
   @Getter private Map<Integer, Map<Integer, NeelixInventoryItem>> pages; // <page, <slot, item>>
   @Getter private final NeelixPaginatedNavigation navigation;
-  @Getter private final NeelixInventoryType type = NeelixInventoryType.PAGINATED;
 
   /**
    * Create a full functional paginated inventory.

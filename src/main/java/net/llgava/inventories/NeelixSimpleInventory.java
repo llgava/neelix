@@ -3,7 +3,6 @@ package net.llgava.inventories;
 
 import lombok.Getter;
 import net.llgava.items.NeelixInventoryItem;
-import net.llgava.utils.NeelixInventoryType;
 import net.llgava.utils.NeelixMessages;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
@@ -13,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 public class NeelixSimpleInventory extends NeelixInventory {
-  @Getter private final NeelixInventoryType type = NeelixInventoryType.SIMPLE;
   @Getter private final Map<Integer, NeelixInventoryItem> inventoryItems = new HashMap<>();
 
   /**
