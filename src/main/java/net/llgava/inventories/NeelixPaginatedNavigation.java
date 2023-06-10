@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,17 +37,6 @@ public class NeelixPaginatedNavigation {
   public NeelixPaginatedNavigation(NextInventoryPageItem next, PreviousInventoryPageItem previous) {
     this.nextNavigationItem = next;
     this.previousNavigationItem = previous;
-  }
-
-  /**
-   * @return Add navigation items slot to {@link NeelixInventory#lockedSlots}.
-   * */
-  public List<Integer> asLockedSlots() {
-    List<Integer> list = new ArrayList<>();
-    list.add(this.previousNavigationItem.getSlot());
-    list.add(this.nextNavigationItem.getSlot());
-
-    return list;
   }
 
   /**

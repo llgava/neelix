@@ -27,13 +27,12 @@ public class NeelixInventoryHandler implements Listener {
 
   @EventHandler
   public void clickHandler(InventoryClickEvent event) {
-    event.setCancelled(true);
-
     int clickedSlot = event.getRawSlot();
     Player player = (Player) event.getView().getPlayer();
     NeelixInventory inventory = this.inventoryManager.getInventoryByTitle(event.getView().getTitle());
     if (inventory == null) return;
 
+    event.setCancelled(true);
     NeelixInventoryItem clickedItem = inventory.getClickedItem(clickedSlot);
     if (clickedItem == null) return;
 

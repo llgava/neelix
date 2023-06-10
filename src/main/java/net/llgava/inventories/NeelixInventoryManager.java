@@ -30,9 +30,7 @@ public class NeelixInventoryManager {
    * @param inventory The inventory to be registered
    */
   public void registerInventory(NeelixInventory inventory) {
-    Bukkit.getScheduler().runTaskAsynchronously(this.pluginInstance, () -> {
-      this.inventories.add(inventory);
-    });
+    this.inventories.add(inventory);
   }
 
   /**

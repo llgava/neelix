@@ -6,8 +6,11 @@ import net.llgava.inventories.handlers.CloseNeelixInventoryHandle;
 import net.llgava.inventories.handlers.FullNeelixInventoryHandle;
 import net.llgava.items.NeelixInventoryItem;
 import net.llgava.utils.NeelixInventoryType;
+import net.llgava.utils.NeelixMessages;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -51,12 +54,76 @@ public abstract class NeelixInventory {
    * Resets the inventory to initial configured state.
    * */
   public void reset() {
-    for (NeelixInventoryItem item: this.items) {
+    for (NeelixInventoryItem item : this.items) {
       this.lockedSlots.remove(item.getSlot());
     }
 
     this.inventory.clear();
+    this.currentSlot = 0;
     this.mount();
+  }
+
+  /**
+   * Add new item to the inventory.
+   * @param item The item to be added.
+   * */
+  public void addItem(NeelixInventoryItem item) {
+    this.items.add(item);
+
+    this.reset();
+  }
+
+  /**
+   * Return an item from the inventory.
+   * @param name The name of the item.
+   * */
+  public NeelixInventoryItem getItemByName(String name) {
+    for (NeelixInventoryItem item : this.items) {
+      if (ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName()).equals(name)) {
+        return item;
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Remove an item from the inventory.
+   * @param name The name of the item.
+   * */
+  public void removeItemByName(String name) {
+    NeelixInventoryItem item = this.getItemByName(name);
+    this.items.remove(item);
+    this.lockedSlots.removeIf(slot -> slot.equals(item.getSlot()));
+
+    this.reset();
+  }
+
+  /**
+   * Add new slots to locked slots list.
+   * @param slots The slots number.
+   * */
+  public void addLockedSlot(int... slots) {
+    for (int slot : slots) {
+      this.addLockedSlot(slot);
+    }
+  }
+
+  /**
+   * Add a new slot to locked slots list.
+   * @param slot The slot number.
+   * */
+  public void addLockedSlot(int slot) {
+    if (this.lockedSlots.contains(slot)) {
+      Bukkit.getServer().getLogger().warning(
+        NeelixMessages.DUPLICATED_LOCKED_SLOT.getMessage()
+          .replace("{1}", String.valueOf(slot))
+      );
+
+      return;
+    }
+
+    this.lockedSlots.add(slot);
   }
 
   /**

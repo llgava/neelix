@@ -12,7 +12,7 @@ import java.util.*;
 
 public class NeelixPaginatedInventory extends NeelixInventory {
   @Getter private int openedPage = 0;
-  @Getter private final Map<Integer, Map<Integer, NeelixInventoryItem>> pages = new HashMap<>(); // <page, <slot, item>>
+  @Getter private Map<Integer, Map<Integer, NeelixInventoryItem>> pages; // <page, <slot, item>>
   @Getter private final NeelixPaginatedNavigation navigation;
   @Getter private final NeelixInventoryType type = NeelixInventoryType.PAGINATED;
 
@@ -28,13 +28,17 @@ public class NeelixPaginatedInventory extends NeelixInventory {
   public NeelixPaginatedInventory(int size, String title, List<Integer> lockedSlots, List<NeelixInventoryItem> items, NeelixPaginatedNavigation navigation) {
     super(size, title, lockedSlots, items);
     this.navigation = navigation;
-    this.lockedSlots.addAll(this.navigation.asLockedSlots());
+    this.addLockedSlot(
+      this.navigation.getNextNavigationItem().getSlot(),
+      this.navigation.getPreviousNavigationItem().getSlot()
+    );
 
     this.mount();
   }
 
   @Override
   protected void mount() {
+    this.pages = new HashMap<>();
     int page = 0;
     ArrayList<Integer> pageLockedSlots = new ArrayList<>();
     HashMap<Integer, NeelixInventoryItem> items = new HashMap<>();

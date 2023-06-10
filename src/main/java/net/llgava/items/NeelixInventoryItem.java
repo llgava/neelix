@@ -3,6 +3,7 @@ package net.llgava.items;
 import lombok.Getter;
 import lombok.Setter;
 import net.llgava.inventories.NeelixInventory;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -33,6 +34,10 @@ public abstract class NeelixInventoryItem {
     this.slot = slot;
     this.item = item == null ? new ItemStack(Material.AIR) : item;
     this.uuid = UUID.randomUUID();
+  }
+
+  public String getName() {
+    return this.item.getItemMeta().getDisplayName();
   }
 
   /**
