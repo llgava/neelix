@@ -16,26 +16,43 @@ public abstract class NeelixInventoryItem {
   @Getter private String identifier;
   @Getter @Setter private Integer slot;
   @Getter @Setter private ItemStack item;
+  @Getter @Setter private boolean staticItem;
   @Getter private final UUID uuid;
 
   @Getter private ClickType clickType = null;
   @Getter private InventoryAction action = null;
 
   public NeelixInventoryItem(ItemStack item) {
-    this(null, item);
+    this(item, false);
+  }
+
+  public NeelixInventoryItem(ItemStack item, boolean staticItem) {
+    this(null, item, staticItem);
   }
 
   public NeelixInventoryItem(String identifier, ItemStack item) {
-    this(identifier, item, null);
+    this(identifier, item, false);
+  }
+
+  public NeelixInventoryItem(String identifier, ItemStack item, boolean staticItem) {
+    this(identifier, item, null, staticItem);
   }
 
   public NeelixInventoryItem(String identifier, ItemStack item, Integer slot) {
+    this(identifier, item, slot, false);
+  }
+
+  public NeelixInventoryItem(String identifier, ItemStack item, Integer slot, boolean staticItem) {
     this.identifier = identifier;
     this.slot = slot;
     this.item = item == null ? new ItemStack(Material.AIR) : item;
+    this.staticItem = staticItem;
     this.uuid = UUID.randomUUID();
   }
 
+  /**
+   * @return The name of the {@link ItemStack}
+   * */
   public String getName() {
     return this.item.getItemMeta().getDisplayName();
   }

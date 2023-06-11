@@ -11,7 +11,7 @@ public class NextInventoryPageItem extends NeelixInventoryItem {
    * Create a full functional "next page" inventory item. <br />
    *
    * @param item The item to be used as next item.
-   * @param slot The inventory slot the item should be in. This slot will be added to the inventory {@link NeelixInventory#lockedSlots}.
+   * @param slot The inventory slot the item should be in. This slot will be added to the inventory locked slots.
    */
   public NextInventoryPageItem(ItemStack item, int slot) {
     super("next_page", item, slot);

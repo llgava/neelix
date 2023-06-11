@@ -1,6 +1,5 @@
 package net.llgava.utils;
 
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,7 +31,7 @@ public enum NeelixMessages {
     return null;
   }
 
-  public String getParsedMessage(String... values) {
+  public int getOccurrencesSize() {
     String pattern = "\\{\\d+}";
     Pattern rgx = Pattern.compile(pattern);
     Matcher matcher = rgx.matcher(this.message);
@@ -40,10 +39,14 @@ public enum NeelixMessages {
 
     while (matcher.find()) { ocrs++; }
 
-    if (values.length == 0 || ocrs == 0) return this.message;
+    return ocrs;
+  }
+
+  public String getParsedMessage(String... values) {
+    if (values.length == 0 || this.getOccurrencesSize() == 0) return this.message;
 
     String parsedMessage = this.message;
-    for (int i = 0; i < ocrs; i++) {
+    for (int i = 0; i < this.getOccurrencesSize(); i++) {
       String ocr = String.format("{%d}", i);
       parsedMessage = parsedMessage
         .replace(ocr, values[i]);

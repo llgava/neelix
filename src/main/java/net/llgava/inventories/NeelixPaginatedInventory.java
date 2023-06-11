@@ -46,7 +46,7 @@ public class NeelixPaginatedInventory extends NeelixInventory {
 
       // Page items limit
       if (items.size() >= this.getMaxItemsPerPage() || isLastItem) {
-        this.putNavigationItems(items);
+        this.putStaticItems(items);
         this.pages.put(page, items);
 
         page++;
@@ -82,8 +82,21 @@ public class NeelixPaginatedInventory extends NeelixInventory {
       this.currentSlot++;
     }
 
-    this.putNavigationItems(items);
+    this.putStaticItems(items);
     this.pages.put(page, items);
+  }
+
+  /**
+   * Static items are items that should automatically lock the slots and if the
+   * inventory be a {@link NeelixPaginatedInventory}, be present in every page.
+   * */
+  protected void putStaticItems(HashMap<Integer, NeelixInventoryItem> items) {
+    items.put(this.navigation.getNextNavigationItem().getSlot(), this.navigation.getNextNavigationItem());
+    items.put(this.navigation.getPreviousNavigationItem().getSlot(), this.navigation.getPreviousNavigationItem());
+
+    for (NeelixInventoryItem staticItem : this.getStaticItems()) {
+      items.put(staticItem.getSlot(), staticItem);
+    }
   }
 
   /**
@@ -91,14 +104,6 @@ public class NeelixPaginatedInventory extends NeelixInventory {
    * */
   public int getMaxItemsPerPage() {
     return this.size - this.lockedSlots.size();
-  }
-
-  /**
-   * Add navigation items to the current inventory.
-   * */
-  private void putNavigationItems(HashMap<Integer, NeelixInventoryItem> items) {
-    items.put(this.navigation.getNextNavigationItem().getSlot(), this.navigation.getNextNavigationItem());
-    items.put(this.navigation.getPreviousNavigationItem().getSlot(), this.navigation.getPreviousNavigationItem());
   }
 
   /**

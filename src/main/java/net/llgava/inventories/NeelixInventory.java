@@ -13,6 +13,7 @@ import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public abstract class NeelixInventory {
@@ -30,6 +31,8 @@ public abstract class NeelixInventory {
     this.lockedSlots = lockedSlots != null ? lockedSlots : new ArrayList<>();
     this.items = items;
     this.inventory = Bukkit.createInventory(null, this.size, this.title);
+
+    this.setupStaticItemsSlot();
   }
 
   /**
@@ -47,6 +50,30 @@ public abstract class NeelixInventory {
    * @return The clicked item by the clicked slot.
    * */
   public abstract NeelixInventoryItem getClickedItem(int clickedSlot);
+
+  /**
+   * Static items are items that should automatically lock the slots and if the
+   * inventory be a {@link NeelixPaginatedInventory}, be present in every page.
+   * */
+  private void setupStaticItemsSlot() {
+    for (NeelixInventoryItem item : this.items) {
+      if (item.isStaticItem()) {
+        this.addLockedSlot(item.getSlot());
+      }
+    }
+  }
+
+  public ArrayList<NeelixInventoryItem> getStaticItems() {
+    ArrayList<NeelixInventoryItem> staticItems = new ArrayList<>();
+
+    for (NeelixInventoryItem item : this.items) {
+      if (item.isStaticItem()) {
+        staticItems.add(item);
+      }
+    }
+
+    return staticItems;
+  }
 
   /**
    * Resets the inventory to initial configured state.
