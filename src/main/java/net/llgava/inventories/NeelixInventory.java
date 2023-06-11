@@ -1,6 +1,7 @@
 package net.llgava.inventories;
 
 import lombok.Getter;
+import net.llgava.Neelix;
 import net.llgava.inventories.handlers.OpenNeelixInventoryHandle;
 import net.llgava.inventories.handlers.CloseNeelixInventoryHandle;
 import net.llgava.inventories.handlers.FullNeelixInventoryHandle;
@@ -112,9 +113,8 @@ public abstract class NeelixInventory {
    * */
   public void addLockedSlot(int slot) {
     if (this.lockedSlots.contains(slot)) {
-      Bukkit.getServer().getLogger().warning(
-        NeelixMessages.DUPLICATED_LOCKED_SLOT.getMessage()
-          .replace("{1}", String.valueOf(slot))
+      Neelix.LOGGER.warning(
+        NeelixMessages.DUPLICATED_LOCKED_SLOT.getParsedMessage(String.valueOf(slot))
       );
 
       return;

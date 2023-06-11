@@ -62,8 +62,7 @@ public abstract class CustomConfig {
   protected boolean isValidExtension(String extension) {
     if(!this.name.endsWith(extension)) {
       throw new Error(
-        NeelixMessages.INVALID_FILE_EXTENSION.getMessage()
-          .replace("{1}", extension)
+        NeelixMessages.INVALID_FILE_EXTENSION.getParsedMessage(extension)
       );
     }
 

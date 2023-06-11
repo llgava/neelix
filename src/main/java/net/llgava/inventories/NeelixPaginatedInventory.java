@@ -1,9 +1,9 @@
 package net.llgava.inventories;
 
 import lombok.Getter;
+import net.llgava.Neelix;
 import net.llgava.items.NeelixInventoryItem;
 import net.llgava.utils.NeelixMessages;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
@@ -58,10 +58,11 @@ public class NeelixPaginatedInventory extends NeelixInventory {
       // Items with non-null slot value
       if (item.getSlot() != null) {
         if (this.lockedSlots.contains(item.getSlot()) || pageLockedSlots.contains(item.getSlot())) {
-          Bukkit.getServer().getLogger().warning(
-            NeelixMessages.INVENTORY_ITEM_SLOT_IS_LOCKED.getMessage()
-              .replace("{1}", String.valueOf(item.getSlot()))
-              .replace("{2}", String.valueOf(item.getItem().getType()))
+          Neelix.LOGGER.warning(
+            NeelixMessages.INVENTORY_ITEM_SLOT_IS_LOCKED.getParsedMessage(
+              String.valueOf(item.getSlot()),
+              String.valueOf(item.getItem().getType())
+            )
           );
 
           continue;
