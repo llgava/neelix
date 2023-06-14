@@ -16,6 +16,8 @@ public class NeelixUtils {
     String version = Bukkit.getBukkitVersion();
     int i = version.indexOf("-");
 
+    if (i == -1) return version;
+
     return version.substring(0, i);
   }
 
@@ -50,7 +52,7 @@ public class NeelixUtils {
   /**
    * Parse the values on all occurrences. <br />
    * Keep in mind that text formatting occurs in ascending order. <br />
-   * The text should be something like: "This is my example {0}"
+   * <b>The text should be something like:</b> "This is my {0} example using the parsed {1} in a string"
    *
    * @param message The minimum Minecraft Server Version.
    * @param values The minimum Minecraft Server Version.
@@ -65,22 +67,23 @@ public class NeelixUtils {
 
     while (matcher.find()) { ocrs++; }
 
-    if (values.length == 0 || ocrs == 0) return message;
+    if (ocrs == 0) return message;
+
+    if (values.length != ocrs) {
+      Neelix.LOGGER.warning(
+        NeelixUtils.parseMessage(
+          NeelixMessages.INVALID_PARSED_MESSAGE.getMessage(),
+          String.valueOf(values.length),
+          String.valueOf(ocrs)
+        )
+      );
+
+      return message;
+    }
+
 
     String parsedMessage = message;
     for (int i = 0; i < ocrs; i++) {
-      if (values[i].isEmpty()) {
-        Neelix.LOGGER.warning(
-          NeelixUtils.parseMessage(
-            NeelixMessages.INVALID_PARSED_MESSAGE.getMessage(),
-            String.valueOf(values.length),
-            String.valueOf(ocrs)
-          )
-        );
-
-        return message;
-      }
-
       String ocr = String.format("{%d}", i);
       parsedMessage = parsedMessage
         .replace(ocr, values[i]);

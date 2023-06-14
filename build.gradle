@@ -20,10 +20,11 @@ project.gradle.projectsEvaluated {
 
     repositories {
       mavenCentral()
-
-      maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
-      maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-      maven { url 'https://repo.maven.apache.org/maven2/' }
+      //maven { url 'https://jitpack.io' }
+      maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' } // Spigot
+      maven { url "https://oss.sonatype.org/content/repositories/snapshots/" } // Spigot
+      //maven { url 'https://repo.maven.apache.org/maven2/' }
+      maven { url 'https://repo.papermc.io/repository/maven-public/' } // MockBukkit
     }
 
     dependencies {
@@ -31,12 +32,16 @@ project.gradle.projectsEvaluated {
       compileOnly "org.spigotmc:spigot-api:${spigot_api_version}-R0.1-SNAPSHOT"
 
       // Lombok
-      compileOnly "org.projectlombok:lombok:1.18.24"
-      annotationProcessor 'org.projectlombok:lombok:1.18.24'
+      compileOnly "org.projectlombok:lombok:1.18.28"
+      annotationProcessor 'org.projectlombok:lombok:1.18.8'
 
-      // Others
-      implementation 'org.jetbrains:annotations:20.1.0'
-      testImplementation 'junit:junit:4.13'
+      // Tests Dependencies
+      testImplementation 'junit:junit:4.13' // JUnit
+      testCompileOnly 'org.projectlombok:lombok:1.18.28' // Lombok
+      testAnnotationProcessor 'org.projectlombok:lombok:1.18.28' // Lombok
+      testImplementation 'com.github.seeseemelk:MockBukkit-v1.16:0.12.0'
+      // MockBukkit
+      //implementation 'org.jetbrains:annotations:20.1.0'
     }
   }
 }

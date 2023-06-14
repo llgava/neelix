@@ -11,7 +11,6 @@ import net.llgava.utils.NeelixUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ public abstract class NeelixInventory {
   protected Inventory inventory;
   protected int currentSlot;
 
-  public NeelixInventory(int size, String title, @Nullable List<Integer> lockedSlots, List<NeelixInventoryItem> items) {
+  public NeelixInventory(int size, String title, List<Integer> lockedSlots, List<NeelixInventoryItem> items) {
     this.currentSlot = 0;
     this.size = size;
     this.title = title;
