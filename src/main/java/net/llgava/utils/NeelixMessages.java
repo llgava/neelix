@@ -1,5 +1,7 @@
 package net.llgava.utils;
 
+import lombok.Getter;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,9 +14,11 @@ public enum NeelixMessages {
   SUBCOMMAND_PERMISSION_CANNOT_BE_NULL("Permission cannot be null, use empty string instead."),
   INVENTORY_ITEM_SLOT_IS_LOCKED("The slot '{0}' for the item '{1}' is a locked slots. The item was ignored."),
   INVENTORY_ITEMS_LIMIT_REACHED("The item limit for the inventory '{0}' has been reached. If you want to add more items, reduce the number of locked slots or use a paginated inventory."),
-  DUPLICATED_LOCKED_SLOT("TODO: '{0}' ignored!"),
+  DUPLICATED_LOCKED_SLOT("The slot '{0}' for the inventory '{1}' is already registered as a locked slot."),
+  INVALID_PARSED_MESSAGE("The number of declared values ('{0}') is different from the number of occurrences ('{1}')."),
   EMPTY_GENERIC_ENUM_ITEMS("The items parameter for a GenericEnumItem are empty! The initial item will be AIR.");
 
+  @Getter
   private final String message;
 
   NeelixMessages(String message) {
@@ -30,32 +34,5 @@ public enum NeelixMessages {
 
     return null;
   }
-
-  public int getOccurrencesSize() {
-    String pattern = "\\{\\d+}";
-    Pattern rgx = Pattern.compile(pattern);
-    Matcher matcher = rgx.matcher(this.message);
-    int ocrs = 0;
-
-    while (matcher.find()) { ocrs++; }
-
-    return ocrs;
-  }
-
-  public String getParsedMessage(String... values) {
-    if (values.length == 0 || this.getOccurrencesSize() == 0) return this.message;
-
-    String parsedMessage = this.message;
-    for (int i = 0; i < this.getOccurrencesSize(); i++) {
-      String ocr = String.format("{%d}", i);
-      parsedMessage = parsedMessage
-        .replace(ocr, values[i]);
-    }
-
-    return parsedMessage;
-  }
-
-  public String getRawMessage() {
-    return this.message;
-  }
 }
+

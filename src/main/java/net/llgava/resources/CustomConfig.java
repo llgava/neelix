@@ -2,6 +2,7 @@ package net.llgava.resources;
 
 import lombok.Getter;
 import net.llgava.utils.NeelixMessages;
+import net.llgava.utils.NeelixUtils;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -62,7 +63,10 @@ public abstract class CustomConfig {
   protected boolean isValidExtension(String extension) {
     if(!this.name.endsWith(extension)) {
       throw new Error(
-        NeelixMessages.INVALID_FILE_EXTENSION.getParsedMessage(extension)
+        NeelixUtils.parseMessage(
+          NeelixMessages.INVALID_FILE_EXTENSION.getMessage(),
+          extension
+        )
       );
     }
 

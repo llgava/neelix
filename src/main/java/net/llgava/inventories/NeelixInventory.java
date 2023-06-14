@@ -7,6 +7,7 @@ import net.llgava.inventories.handlers.CloseNeelixInventoryHandle;
 import net.llgava.inventories.handlers.FullNeelixInventoryHandle;
 import net.llgava.items.NeelixInventoryItem;
 import net.llgava.utils.NeelixMessages;
+import net.llgava.utils.NeelixUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
@@ -140,7 +141,10 @@ public abstract class NeelixInventory {
   public void addLockedSlot(int slot) {
     if (this.lockedSlots.contains(slot)) {
       Neelix.LOGGER.warning(
-        NeelixMessages.DUPLICATED_LOCKED_SLOT.getParsedMessage(String.valueOf(slot))
+        NeelixUtils.parseMessage(
+          NeelixMessages.DUPLICATED_LOCKED_SLOT.getMessage(),
+          String.valueOf(slot)
+        )
       );
 
       return;

@@ -20,7 +20,7 @@ public abstract class NeelixSubcommand {
     this.name = name;
     this.permission = Objects.requireNonNull(
       permission,
-      NeelixMessages.SUBCOMMAND_PERMISSION_CANNOT_BE_NULL.getRawMessage()
+      NeelixMessages.SUBCOMMAND_PERMISSION_CANNOT_BE_NULL.getMessage()
     );
   }
 

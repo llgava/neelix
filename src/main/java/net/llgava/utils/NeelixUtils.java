@@ -1,6 +1,10 @@
 package net.llgava.utils;
 
+import net.llgava.Neelix;
 import org.bukkit.Bukkit;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class NeelixUtils {
 
@@ -41,5 +45,47 @@ public class NeelixUtils {
     }
 
     return true;
+  }
+
+  /**
+   * Parse the values on all occurrences. <br />
+   * Keep in mind that text formatting occurs in ascending order. <br />
+   * The text should be something like: "This is my example {0}"
+   *
+   * @param message The minimum Minecraft Server Version.
+   * @param values The minimum Minecraft Server Version.
+   *
+   * @return The parsed message.
+   */
+  public static String parseMessage(String message, String... values) {
+    String pattern = "\\{\\d+}";
+    Pattern rgx = Pattern.compile(pattern);
+    Matcher matcher = rgx.matcher(message);
+    int ocrs = 0;
+
+    while (matcher.find()) { ocrs++; }
+
+    if (values.length == 0 || ocrs == 0) return message;
+
+    String parsedMessage = message;
+    for (int i = 0; i < ocrs; i++) {
+      if (values[i].isEmpty()) {
+        Neelix.LOGGER.warning(
+          NeelixUtils.parseMessage(
+            NeelixMessages.INVALID_PARSED_MESSAGE.getMessage(),
+            String.valueOf(values.length),
+            String.valueOf(ocrs)
+          )
+        );
+
+        return message;
+      }
+
+      String ocr = String.format("{%d}", i);
+      parsedMessage = parsedMessage
+        .replace(ocr, values[i]);
+    }
+
+    return parsedMessage;
   }
 }
