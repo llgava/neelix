@@ -33,15 +33,14 @@ public class NeelixUtilsTest {
 
   @Test
   public void parseMessageTest() {
-    String message = "This is my {0} example using the parsed {1} in a string";
+    String rawMessage = "This is my {0} example using the parsed {1} in a string";
     String expectedMessage = "This is my first example using the parsed value in a string";
+    String noOccurrencesMessage = "This is my first example using the parsed value in a string";
 
-    String noOccurrences = "This is my first example using the parsed value in a string";
-
-    Assert.assertEquals(NeelixUtils.parseMessage(message, "first", "value"), expectedMessage);
-    Assert.assertEquals(NeelixUtils.parseMessage(message, "first"), message);
-    Assert.assertEquals(NeelixUtils.parseMessage(message, "first", "value", "invalid"), message);
-    Assert.assertEquals(NeelixUtils.parseMessage(noOccurrences, "first", "value", "invalid"), noOccurrences);
+    Assert.assertEquals(NeelixUtils.parseMessage(rawMessage, "first", "value"), expectedMessage);
+    Assert.assertEquals(NeelixUtils.parseMessage(rawMessage, "first"), rawMessage);
+    Assert.assertEquals(NeelixUtils.parseMessage(rawMessage, "first", "value", "invalid"), rawMessage);
+    Assert.assertEquals(NeelixUtils.parseMessage(noOccurrencesMessage, "first", "value", "invalid"), noOccurrencesMessage);
   }
 
   @After

@@ -1,7 +1,7 @@
 package net.llgava.commands;
 
-import net.llgava.events.SubcommandFailEvent;
-import net.llgava.utils.NeelixSubcommandFailType;
+import net.llgava.events.PlayerWithoutSubcommandPermissionEvent;
+import net.llgava.events.SubcommandNotFoundEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -44,13 +44,13 @@ public class NeelixCommandExecutor implements TabExecutor {
 
       if(subcommand == null) {
         Bukkit.getServer().getPluginManager()
-          .callEvent(new SubcommandFailEvent(player, command, null, NeelixSubcommandFailType.SUBCOMMAND_NOT_FOUND));
+          .callEvent(new SubcommandNotFoundEvent(player));
         return true;
       }
 
       if(!player.hasPermission(subcommand.getPermission()) && !subcommand.getPermission().isEmpty()) {
         Bukkit.getServer().getPluginManager()
-          .callEvent(new SubcommandFailEvent(player, command, subcommand, NeelixSubcommandFailType.WITHOUT_PERMISSION_FOR_SUBCOMMAND));
+          .callEvent(new PlayerWithoutSubcommandPermissionEvent(player, command, subcommand));
         return true;
       }
 

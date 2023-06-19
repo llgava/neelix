@@ -17,19 +17,10 @@ public class Neelix extends JavaPlugin {
   public static final Logger LOGGER = Bukkit.getServer().getLogger();
 
   /**
-   * <b>UNIT TESTING ONLY</b><br />
-   * This constructor is used only for unit tests
-   * and should not be used in production.
+   * This constructor is used only for unit tests!
    */
-  public Neelix() { super(); }
-
-  /**
-   * <b>UNIT TESTING ONLY</b><br />
-   * This constructor is used only for unit tests
-   * and should not be used in production.
-   */
-  protected Neelix(JavaPluginLoader l, PluginDescriptionFile d, File dF, File f) {
-    super(l, d, dF, f);
+  protected Neelix(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file) {
+    super(loader, description, dataFolder, file);
   }
 
   @Override
