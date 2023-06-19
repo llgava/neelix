@@ -9,13 +9,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class NeelixUtilsTest {
-  private ServerMock server;
-  private Neelix neelix;
 
   @Before
   public void setUp() {
-    this.server = MockBukkit.mock();
-    this.neelix = MockBukkit.load(Neelix.class);
+    ServerMock server = MockBukkit.mock();
+    Neelix neelix = MockBukkit.load(Neelix.class);
   }
 
   @Test
