@@ -1,6 +1,6 @@
 # Changelog - ![Latest Release](https://img.shields.io/github/v/release/llgava/neelix?logo=github&logoColor=959da5&labelColor=353c43&color=0091c2&Current&label=Release)
 
-## [1.6.0: Custom Inventories](https://github.com/llgava/neelix/releases/tag/v1.6.0) - (07-03-2023)
+## [1.6.0: Better Handlers](https://github.com/llgava/neelix/releases/tag/v1.6.0) - (07-03-2023)
 ##### [Commit History](https://github.com/llgava/neelix/compare/v1.0.0...v1.6.0)
 
 ### **Added**
