@@ -1,16 +1,13 @@
 package net.llgava.utils;
 
-/**
- * <b>NEELIX'S INTERNAL USE</b> <br />
- * An enum containing all standard and recommended Neelix values.
- * */
+/** Default values for everything. */
 public enum NeelixDefaultValues {
-  NEXT_STACK_TITLE("Next page"),
-  PREVIOUS_STACK_TITLE("Previous page"),
-  NEXT_STACK_SLOT(8),
-  PREVIOUS_STACK_SLOT(0),
-  TRUE_STACK_TITLE("Enabled"),
-  FALSE_STACK_TITLE("Disabled");
+  NEXT_PAGE_ITEM_TITLE("Next page"),
+  PREVIOUS_PAGE_ITEM_TITLE("Previous page"),
+  NEXT_PAGE_ITEM_SLOT(8),
+  PREVIOUS_PAGE_ITEM_SLOT(0),
+  TRUE_ITEM_TITLE("Enabled"),
+  FALSE_ITEM_TITLE("Disabled");
 
   private final String value;
 

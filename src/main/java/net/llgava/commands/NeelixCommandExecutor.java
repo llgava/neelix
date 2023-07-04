@@ -13,10 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * This executor is not a substitute for {@link CommandExecutor} or {@link TabExecutor}! <br />
- * Should be used only for {@link NeelixSubcommand} architecture.
-*/
 public class NeelixCommandExecutor implements TabExecutor {
   private static final ArrayList<String> EMPTY_TAB_COMPLETER = new ArrayList<>();
 
@@ -24,6 +20,8 @@ public class NeelixCommandExecutor implements TabExecutor {
   private final List<NeelixSubcommand> subcommands;
 
   /**
+   * This executor is not a substitute for {@link CommandExecutor} or {@link TabExecutor}! <br />
+   * Should be used only for {@link NeelixSubcommand} architecture.
    * @param name The parent command name.
    * @param subcommands All the subcommands linked to the parent command.
    */
@@ -83,6 +81,11 @@ public class NeelixCommandExecutor implements TabExecutor {
     return EMPTY_TAB_COMPLETER;
   }
 
+  /**
+   * Get a subcommand by the name.
+   * @param value The subcommand name.
+   * @return The subcommand instance.
+   */
   public NeelixSubcommand getSubcommandByName(String value) {
     for(NeelixSubcommand subcommand : this.subcommands) {
       if(subcommand.getName().equalsIgnoreCase(value)) {

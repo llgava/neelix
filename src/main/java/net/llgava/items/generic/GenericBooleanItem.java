@@ -18,8 +18,8 @@ public class GenericBooleanItem extends NeelixInventoryItem implements GenericIt
   public GenericBooleanItem(String identifier, boolean initialValue) {
     this(
       identifier,
-      createBooleanItem(Material.LIME_DYE, NeelixDefaultValues.TRUE_STACK_TITLE.getString()),
-      createBooleanItem(Material.GRAY_DYE, NeelixDefaultValues.FALSE_STACK_TITLE.getString()),
+      createBooleanItem(Material.LIME_DYE, NeelixDefaultValues.TRUE_ITEM_TITLE.getString()),
+      createBooleanItem(Material.GRAY_DYE, NeelixDefaultValues.FALSE_ITEM_TITLE.getString()),
       initialValue
     );
   }
@@ -27,8 +27,8 @@ public class GenericBooleanItem extends NeelixInventoryItem implements GenericIt
   public GenericBooleanItem(String identifier, boolean initialValue, int slot) {
     this(
       identifier,
-      createBooleanItem(Material.LIME_DYE, NeelixDefaultValues.TRUE_STACK_TITLE.getString()),
-      createBooleanItem(Material.GRAY_DYE, NeelixDefaultValues.FALSE_STACK_TITLE.getString()),
+      createBooleanItem(Material.LIME_DYE, NeelixDefaultValues.TRUE_ITEM_TITLE.getString()),
+      createBooleanItem(Material.GRAY_DYE, NeelixDefaultValues.FALSE_ITEM_TITLE.getString()),
       initialValue,
       slot
     );

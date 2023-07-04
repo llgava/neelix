@@ -6,13 +6,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-/** This event is called when the subcommand don't exist. */
 public class SubcommandNotFoundEvent extends Event {
   private static final HandlerList HANDLERS = new HandlerList();
 
   @Getter @Setter private boolean cancelled;
   @Getter private final Player player;
 
+  /**
+   * Triggered when a player executes a subcommand that doesn't exist.
+   * @param player The player who executed the invalid subcommand.
+   */
   public SubcommandNotFoundEvent(Player player) {
     this.player = player;
   }

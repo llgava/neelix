@@ -1,4 +1,4 @@
-package net.llgava.events;
+package net.llgava.listener;
 
 import net.llgava.inventories.NeelixInventoryManager;
 import net.llgava.inventories.NeelixInventory;
@@ -12,21 +12,19 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 
-public class NeelixInventoryHandler implements Listener {
+public class NeelixInventoryHandlerListener implements Listener {
   private final NeelixInventoryManager manager;
 
   /**
-   * <b>NEELIX'S INTERNAL USE</b> <br />
-   * This listener is used internally for Neelix. <b>DO NOT</b> re-register on your plugin.
-   *
-   * @param inventoryManager The manager responsive to control all Neelix inventories.
+   * Responsible for controlling changes related to the {@link NeelixInventory}
+   * @param inventoryManager The inventory manager.
    * */
-  public NeelixInventoryHandler(NeelixInventoryManager inventoryManager) {
+  public NeelixInventoryHandlerListener(NeelixInventoryManager inventoryManager) {
     this.manager = inventoryManager;
   }
 
   @EventHandler
-  public void clickHandler(InventoryClickEvent event) {
+  public void onClickNeelixInventory(InventoryClickEvent event) {
     int clickedSlot = event.getRawSlot();
     Player player = (Player) event.getView().getPlayer();
     NeelixInventory inventory = this.manager.getInventory(event.getView().getTitle());
@@ -40,23 +38,23 @@ public class NeelixInventoryHandler implements Listener {
   }
 
   @EventHandler
-  public void openHandler(InventoryOpenEvent event) {
+  public void onOpenNeelixInventory(InventoryOpenEvent event) {
     Player player = (Player) event.getView().getPlayer();
     NeelixInventory inventory = this.manager.getInventory(event.getView().getTitle());
     if (inventory == null) return;
 
-    if (!inventory.isFullHandled() && !inventory.hasOpenHandled()) return;
+    if (!inventory.isFullHandled() && !inventory.isOpenHandled()) return;
 
     ((OpenNeelixInventoryHandle) inventory).onOpenInventory(inventory, player);
   }
 
   @EventHandler
-  public void closeHandler(InventoryCloseEvent event) {
+  public void onCloseNeelixInventory(InventoryCloseEvent event) {
     Player player = (Player) event.getView().getPlayer();
     NeelixInventory inventory = this.manager.getInventory(event.getView().getTitle());
     if (inventory == null) return;
 
-    if (!inventory.isFullHandled() && !inventory.hasCloseHandled()) return;
+    if (!inventory.isFullHandled() && !inventory.isCloseHandled()) return;
 
     ((CloseNeelixInventoryHandle) inventory).onCloseInventory(inventory, player);
   }

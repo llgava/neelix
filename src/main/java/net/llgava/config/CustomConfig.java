@@ -1,4 +1,4 @@
-package net.llgava.resources;
+package net.llgava.config;
 
 import lombok.Getter;
 import net.llgava.utils.NeelixMessages;
@@ -16,7 +16,6 @@ public abstract class CustomConfig {
 
   /**
    * Creates a new configuration file.
-   *
    * @param plugin The main class of the plugin.
    * @param name The name of the config file. (Should be the same name as the file in src/main/resources)
    * @param copyDefaults If true, all values in the default config file will be copied every time when the server is started.
@@ -28,18 +27,14 @@ public abstract class CustomConfig {
     this.dataFolder = plugin.getDataFolder();
   }
 
-  /**
-   * You can use {@link CustomYamlConfig} instead static class.
-   * */
+  /** Create a new configuration file in .yml format. */
   public static class YAML extends CustomYamlConfig {
     public YAML(JavaPlugin plugin, String name, boolean copyDefaults) {
       super(plugin, name, copyDefaults);
     }
   }
 
-  /**
-   * You can use {@link CustomJsonConfig} instead static class.
-   * */
+  /** Create a new configuration file in .json format. */
   public static class JSON extends CustomJsonConfig {
     public JSON(JavaPlugin plugin, String name, boolean copyDefaults) {
       super(plugin, name, copyDefaults);
@@ -47,18 +42,21 @@ public abstract class CustomConfig {
   }
 
   /**
-   * @return The built config file.
-   * */
+   * Build the custom file.
+   * @return The built custom file.
+   */
   public abstract CustomConfig build();
 
   /**
+   * Automatically save any changes to the file.
    * @return True if the file was saved.
-   * */
+   */
   public abstract boolean save();
 
   /**
-   * @param extension The extension to be checked.
-   * @return If the checked extension is the same from the file name.
+   * Check if the file is a valid extension.
+   * @param extension The file extension.
+   * @return True if is a valid extension.
    */
   protected boolean isValidExtension(String extension) {
     if(!this.name.endsWith(extension)) {

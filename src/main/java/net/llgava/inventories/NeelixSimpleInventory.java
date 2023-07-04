@@ -17,7 +17,6 @@ public class NeelixSimpleInventory extends NeelixInventory {
 
   /**
    * Create a full functional simple inventory.
-   *
    * @param size The size of the inventory.
    * @param title The title of the inventory.
    * @param lockedSlots Locked slots cannot allow items in it. If an item is added to a locked slot, it will be ignored.
@@ -74,18 +73,11 @@ public class NeelixSimpleInventory extends NeelixInventory {
     }
   }
 
-  /**
-   * @return The inventory.
-   */
   @Override
   public Inventory getInventory() { return this.inventory; }
 
-  /**
-   * @param clickedSlot The clicked slot on the inventory.
-   * @return The clicked item by the clicked slot.
-   */
   @Override
-  public NeelixInventoryItem getClickedItem(int clickedSlot) {
-    return this.getInventoryItems().get(clickedSlot);
+  public NeelixInventoryItem getClickedItem(int slot) {
+    return this.getInventoryItems().get(slot);
   }
 }

@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 public class NeelixUtils {
 
   /**
-   * The formatted version should be something like the Minecraft versioning "1.20.0".
-   * @return The formatted server version.
+   * Get and format the server version.
+   * @return The server version.
    */
   public static String getServerVersion() {
     String version = Bukkit.getBukkitVersion();
@@ -23,8 +23,9 @@ public class NeelixUtils {
 
   /**
    * Compare the current server version with a minimum version.
+   *
    * @param minVersion The minimum Minecraft Server Version.
-   * @return If the server version matches the minimum version.
+   * @return If the server version is greater or equal to the wanted minimum version.
    */
   public static boolean isMinimumServerVersion(String minVersion) {
     String svVersion = NeelixUtils.getServerVersion();
@@ -80,7 +81,6 @@ public class NeelixUtils {
 
       return message;
     }
-
 
     String parsedMessage = message;
     for (int i = 0; i < ocrs; i++) {

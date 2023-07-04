@@ -16,18 +16,19 @@ public class PlayerWithoutSubcommandPermissionEvent extends Event {
   @Getter private final NeelixSubcommand subcommand;
   @Getter private final Command parent;
 
-  public PlayerWithoutSubcommandPermissionEvent(Player playerWithoutPermission, Command parent, NeelixSubcommand subcommand) {
-    this.playerWithoutPermission = playerWithoutPermission;
+  /**
+   * Triggered when a player run a subcommand without permission for it.
+   * @param player The player with no permission for the subcommand.
+   * @param parent The parent command.
+   * @param subcommand The subcommand.
+   */
+  public PlayerWithoutSubcommandPermissionEvent(Player player, Command parent, NeelixSubcommand subcommand) {
+    this.playerWithoutPermission = player;
     this.subcommand = subcommand;
     this.parent = parent;
   }
 
   @Override
-  public HandlerList getHandlers() {
-    return HANDLERS;
-  }
-
-  public static HandlerList getHandlerList() {
-    return HANDLERS;
-  }
+  public HandlerList getHandlers() { return HANDLERS; }
+  public static HandlerList getHandlerList() { return HANDLERS; }
 }

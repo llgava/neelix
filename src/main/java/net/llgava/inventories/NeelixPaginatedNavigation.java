@@ -9,10 +9,6 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-
 public class NeelixPaginatedNavigation {
   @Getter private final NextInventoryPageItem nextNavigationItem;
   @Getter private final PreviousInventoryPageItem previousNavigationItem;
@@ -23,8 +19,8 @@ public class NeelixPaginatedNavigation {
    */
   public NeelixPaginatedNavigation() {
     this(
-      new NextInventoryPageItem(defaultNavigationItem(NeelixDefaultValues.NEXT_STACK_TITLE.getString()), NeelixDefaultValues.NEXT_STACK_SLOT.getInt()),
-      new PreviousInventoryPageItem(defaultNavigationItem(NeelixDefaultValues.PREVIOUS_STACK_TITLE.getString()), NeelixDefaultValues.PREVIOUS_STACK_SLOT.getInt())
+      new NextInventoryPageItem(defaultNavigationItem(NeelixDefaultValues.NEXT_PAGE_ITEM_TITLE.getString()), NeelixDefaultValues.NEXT_PAGE_ITEM_SLOT.getInt()),
+      new PreviousInventoryPageItem(defaultNavigationItem(NeelixDefaultValues.PREVIOUS_PAGE_ITEM_TITLE.getString()), NeelixDefaultValues.PREVIOUS_PAGE_ITEM_SLOT.getInt())
     );
   }
 

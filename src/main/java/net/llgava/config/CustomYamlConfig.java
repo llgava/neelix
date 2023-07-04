@@ -1,4 +1,4 @@
-package net.llgava.resources;
+package net.llgava.config;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -17,6 +17,12 @@ public class CustomYamlConfig extends CustomConfig {
 
   @Getter private FileConfiguration config;
 
+  /**
+   * Create a new configuration file in .yml format.
+   * @param plugin The main class of the plugin.
+   * @param name The name of the config file. (Should be the same name as the file in src/main/resources)
+   * @param copyDefaults If true, all values in the default config file will be copied every time when the server is started.
+   */
   public CustomYamlConfig(JavaPlugin plugin, String name, boolean copyDefaults) {
     super(plugin, name, copyDefaults);
   }

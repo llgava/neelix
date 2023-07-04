@@ -34,26 +34,23 @@ public abstract class NeelixInventory {
     this.setupStaticItemsSlot();
   }
 
-  /**
-   * Main method which should contain all the logic to build the inventory items.
-   * */
+  /** All the logic to mount the inventory. */
   protected abstract void mount();
 
-  /**
-   * @return The {@link Inventory}.
-   * */
+  /** The Minecraft inventory instance. */
   public abstract Inventory getInventory();
 
   /**
-   * @param clickedSlot The clicked slot on the inventory.
-   * @return The clicked item by the clicked slot.
-   * */
-  public abstract NeelixInventoryItem getClickedItem(int clickedSlot);
+   * Only has effect if the slot is not empty.
+   * @param slot The clicked slot on the inventory.
+   * @return The clicked item.
+   */
+  public abstract NeelixInventoryItem getClickedItem(int slot);
 
   /**
-   * Static items are items that should automatically lock the slots and if the
-   * inventory be a {@link NeelixPaginatedInventory}, be present in every page.
-   * */
+   * Static items are items that should automatically lock the slots.
+   * If the inventory is {@link NeelixPaginatedInventory}, it will be displayed on all pages.
+   */
   private void setupStaticItemsSlot() {
     for (NeelixInventoryItem item : this.items) {
       if (item.isStaticItem()) {
@@ -62,6 +59,10 @@ public abstract class NeelixInventory {
     }
   }
 
+  /**
+   * Check for all registered static items.
+   * @return A list with all static items.
+   */
   public ArrayList<NeelixInventoryItem> getStaticItems() {
     ArrayList<NeelixInventoryItem> staticItems = new ArrayList<>();
 
@@ -74,9 +75,7 @@ public abstract class NeelixInventory {
     return staticItems;
   }
 
-  /**
-   * Resets the inventory to initial configured state.
-   * */
+  /** Resets the inventory to initial configured state. */
   public void reset() {
     for (NeelixInventoryItem item : this.items) {
       this.lockedSlots.remove(item.getSlot());
@@ -90,7 +89,7 @@ public abstract class NeelixInventory {
   /**
    * Add new item to the inventory.
    * @param item The item to be added.
-   * */
+   */
   public void addItem(NeelixInventoryItem item) {
     this.items.add(item);
 
@@ -100,7 +99,7 @@ public abstract class NeelixInventory {
   /**
    * Return an item from the inventory.
    * @param name The name of the item.
-   * */
+   */
   public NeelixInventoryItem getItemByName(String name) {
     for (NeelixInventoryItem item : this.items) {
       if (ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName()).equals(name)) {
@@ -114,7 +113,7 @@ public abstract class NeelixInventory {
   /**
    * Remove an item from the inventory.
    * @param name The name of the item.
-   * */
+   */
   public void removeItemByName(String name) {
     NeelixInventoryItem item = this.getItemByName(name);
     this.items.remove(item);
@@ -126,7 +125,7 @@ public abstract class NeelixInventory {
   /**
    * Add new slots to locked slots list.
    * @param slots The slots number.
-   * */
+   */
   public void addLockedSlot(int... slots) {
     for (int slot : slots) {
       this.addLockedSlot(slot);
@@ -136,7 +135,7 @@ public abstract class NeelixInventory {
   /**
    * Add a new slot to locked slots list.
    * @param slot The slot number.
-   * */
+   */
   public void addLockedSlot(int slot) {
     if (this.lockedSlots.contains(slot)) {
       Neelix.LOGGER.warning(
@@ -152,9 +151,7 @@ public abstract class NeelixInventory {
     this.lockedSlots.add(slot);
   }
 
-  /**
-   * Avoid all configured locked slots when mounting the inventory.
-   * */
+  /** Avoid all configured locked slots when mounting the inventory. */
   protected void skipLockedSlots() {
     if(this.lockedSlots.contains(this.currentSlot)) {
       do {
@@ -173,11 +170,11 @@ public abstract class NeelixInventory {
    * {@link OpenNeelixInventoryHandle} are inventories that trigger an event when opened.
    * @return If the inventory is an instance of open handled inventory.
    */
-  public boolean hasOpenHandled()  { return this instanceof OpenNeelixInventoryHandle; }
+  public boolean isOpenHandled()  { return this instanceof OpenNeelixInventoryHandle; }
 
   /**
    * {@link CloseNeelixInventoryHandle} are inventories that trigger an event when closed.
    * @return If the inventory is an instance of close handled inventory.
    */
-  public boolean hasCloseHandled()  { return this instanceof CloseNeelixInventoryHandle; }
+  public boolean isCloseHandled()  { return this instanceof CloseNeelixInventoryHandle; }
 }

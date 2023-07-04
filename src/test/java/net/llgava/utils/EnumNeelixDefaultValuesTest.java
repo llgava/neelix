@@ -1,12 +1,11 @@
 package net.llgava.utils;
 
-import net.llgava.utils.NeelixDefaultValues;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class EnumNeelixDefaultValuesTest {
-  private static final NeelixDefaultValues DEFAULT_VALUE_STRING = NeelixDefaultValues.NEXT_STACK_TITLE;
-  private static final NeelixDefaultValues DEFAULT_VALUE_INT = NeelixDefaultValues.NEXT_STACK_SLOT;
+  private static final NeelixDefaultValues DEFAULT_VALUE_STRING = NeelixDefaultValues.NEXT_PAGE_ITEM_TITLE;
+  private static final NeelixDefaultValues DEFAULT_VALUE_INT = NeelixDefaultValues.NEXT_PAGE_ITEM_SLOT;
 
   @Test
   public void getByIndexTest() {

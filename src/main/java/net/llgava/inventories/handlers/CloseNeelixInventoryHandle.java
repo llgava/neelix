@@ -4,9 +4,10 @@ import net.llgava.inventories.NeelixInventory;
 import org.bukkit.entity.Player;
 
 public interface CloseNeelixInventoryHandle {
-
   /**
-   * A code block to be triggered when the NeelixInventory be closed.
-   * */
-  void onCloseInventory(NeelixInventory neelixInventory, Player player);
+   * Triggered when the player close a {@link NeelixInventory}
+   * @param inventory The inventory closed.
+   * @param player The player who closed the inventory.
+   */
+  void onCloseInventory(NeelixInventory inventory, Player player);
 }

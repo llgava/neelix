@@ -1,4 +1,4 @@
-package net.llgava.resources;
+package net.llgava.config;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -17,6 +17,12 @@ public class CustomJsonConfig extends CustomConfig {
 
   @Getter private JsonObject data;
 
+  /**
+   * Create a new configuration file in .json format.
+   * @param plugin The main class of the plugin.
+   * @param name The name of the config file. (Should be the same name as the file in src/main/resources)
+   * @param copyDefaults If true, all values in the default config file will be copied every time when the server is started.
+   */
   public CustomJsonConfig(JavaPlugin plugin, String name, boolean copyDefaults) {
     super(plugin, name, copyDefaults);
   }
@@ -34,8 +40,8 @@ public class CustomJsonConfig extends CustomConfig {
     if(this.copyDefaults) { this.customFile.delete(); }
 
     if(!this.customFile.exists()) {
-      InputStream resourceFile = this.plugin.getClass().getClassLoader().getResourceAsStream(this.name);
-      Files.copy(resourceFile, Paths.get(this.dataFolder.getPath().concat("/").concat(this.name)));
+      InputStream resource = this.plugin.getClass().getClassLoader().getResourceAsStream(this.name);
+      Files.copy(resource, Paths.get(this.dataFolder.getPath().concat("/").concat(this.name)));
     }
 
     this.data = gson.fromJson(new FileReader(this.customFile), JsonObject.class);

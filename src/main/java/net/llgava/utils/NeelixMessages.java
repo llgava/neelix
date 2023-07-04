@@ -2,10 +2,7 @@ package net.llgava.utils;
 
 import lombok.Getter;
 
-/**
- * <b>NEELIX'S INTERNAL USE</b> <br />
- * An enum containing all messages from Neelix.
- * */
+/** Messages related to Neelix. */
 public enum NeelixMessages {
   INVALID_FILE_EXTENSION("The file doesn't have a valid extension. Please, use '{0}' extension."),
   SUBCOMMAND_PERMISSION_CANNOT_BE_NULL("Permission cannot be null, use empty string instead."),
@@ -17,8 +14,7 @@ public enum NeelixMessages {
   INVALID_PARSED_MESSAGE("The number of declared values '{0}' is different from the number of occurrences '{1}'."),
   EMPTY_GENERIC_ENUM_ITEMS("The items parameter for a GenericEnumItem are empty! The initial item will be AIR.");
 
-  @Getter
-  private final String message;
+  @Getter private final String message;
 
   NeelixMessages(String message) {
     this.message = message;

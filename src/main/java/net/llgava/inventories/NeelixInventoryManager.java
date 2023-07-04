@@ -2,7 +2,7 @@ package net.llgava.inventories;
 
 import lombok.Getter;
 import net.llgava.Neelix;
-import net.llgava.events.NeelixInventoryHandler;
+import net.llgava.listener.NeelixInventoryHandlerListener;
 import net.llgava.utils.NeelixMessages;
 import net.llgava.utils.NeelixUtils;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,13 +14,16 @@ public class NeelixInventoryManager {
   @Getter private final List<NeelixInventory> inventories = new ArrayList<>();
 
   public NeelixInventoryManager(JavaPlugin plugin) {
-
-    plugin.getServer().getPluginManager().registerEvents(new NeelixInventoryHandler(this), plugin);
+    plugin.getServer().getPluginManager().registerEvents(
+      new NeelixInventoryHandlerListener(this),
+      plugin
+    );
   }
 
   /**
+   * Returns a Neelix inventory by the title.
    * @param title The inventory title.
-   * @return A Neelix inventory.
+   * @return The inventory.
    */
   public NeelixInventory getInventory(String title) {
     for (NeelixInventory inventory : this.inventories) {

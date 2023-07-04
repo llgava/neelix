@@ -12,10 +12,10 @@ public abstract class NeelixSubcommand {
   @Getter private final String permission;
 
   /**
-   * A new subcommand instance.
+   * A new subcommand.
    * @param name The subcommand name.
    * @param permission The needed permission to use the subcommand.
-   * */
+   */
   public NeelixSubcommand(String name, String permission) {
     this.name = name;
     this.permission = Objects.requireNonNull(
@@ -24,15 +24,13 @@ public abstract class NeelixSubcommand {
     );
   }
 
-  /**
-   * Code block to be executed when the subcommand is sent by the player
-   * */
+  /** The code to be executed when the subcommand be triggered. */
   public abstract void execute(Player player, String[] args);
 
   /**
-   * Convert the {@link NeelixSubcommand} to a {@link CommandExecutor}. <br />
+   * Convert the {@link NeelixSubcommand} to a {@link CommandExecutor}.
    * This can be used to create aliases of subcommands.
-   * */
+   */
   public CommandExecutor toCommandExecutor() {
     return (sender, command, label, args) -> {
       if (!(sender instanceof Player)) return true;
