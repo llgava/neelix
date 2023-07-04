@@ -1,59 +1,43 @@
 plugins {
-  id 'java-library'
-  id 'maven-publish'
+  id("java-library")
+  id("maven-publish")
 }
 
-group = 'net.llgava'
-version = '1.5.0'
-description = 'A Java library to avoid repetitive work while developing Minecraft Spigot/Paper plugins.'
-String spigot_api_version = '1.13'
+group = "net.llgava"
+version = "1.6.0"
+description = "A Java library to avoid repetitive work while developing Minecraft Spigot/Paper plugins."
+String api_version = "1.13"
 
-processResources.filesMatching('plugin.yml') {
-  expand(project_version: project.version)
+processResources.filesMatching("plugin.yml") {
+  expand(version: project.version)
+  expand(api_version: api_version)
 }
 
 // Configuration
 project.gradle.projectsEvaluated {
   allprojects {
-    java.toolchain.languageVersion = JavaLanguageVersion.of(8)
-    compileJava.options.encoding('UTF-8')
+    java.toolchain.languageVersion.set(JavaLanguageVersion.of(8))
+    compileJava.options.encoding("UTF-8")
 
     repositories {
       mavenCentral()
-      //maven { url 'https://jitpack.io' }
-      maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' } // Spigot
-      maven { url "https://oss.sonatype.org/content/repositories/snapshots/" } // Spigot
-      //maven { url 'https://repo.maven.apache.org/maven2/' }
-      maven { url 'https://repo.papermc.io/repository/maven-public/' } // MockBukkit
+
+      maven { url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/" } // Spigot
+      maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }       // Spigot
+      maven { url "https://repo.papermc.io/repository/maven-public/" }               // MockBukkit
     }
 
     dependencies {
-      // Spigot
-      compileOnly "org.spigotmc:spigot-api:${spigot_api_version}-R0.1-SNAPSHOT"
-
-      // Lombok
-      compileOnly "org.projectlombok:lombok:1.18.28"
-      annotationProcessor 'org.projectlombok:lombok:1.18.8'
+      // General Dependencies
+      compileOnly "org.spigotmc:spigot-api:${api_version}-R0.1-SNAPSHOT"             // Spigot
+      compileOnly "org.projectlombok:lombok:1.18.28"                                 // Lombok
+      annotationProcessor "org.projectlombok:lombok:1.18.8"                          // Lombok
 
       // Tests Dependencies
-      testImplementation 'junit:junit:4.13' // JUnit
-      testCompileOnly 'org.projectlombok:lombok:1.18.28' // Lombok
-      testAnnotationProcessor 'org.projectlombok:lombok:1.18.28' // Lombok
-      testImplementation 'com.github.seeseemelk:MockBukkit-v1.16:0.12.0' // MockBukkit
-    }
-  }
-}
-
-afterEvaluate {
-  apply plugin: 'maven-publish'
-  publishing {
-    publications {
-      maven(MavenPublication) {
-        groupId project.group
-        artifactId project.name
-        version project.version
-        from components.java
-      }
+      testImplementation "junit:junit:4.13"                                          // JUnit
+      testCompileOnly "org.projectlombok:lombok:1.18.28"                             // Lombok
+      testAnnotationProcessor "org.projectlombok:lombok:1.18.28"                     // Lombok
+      testImplementation "com.github.seeseemelk:MockBukkit-v1.16:0.12.0"             // MockBukkit
     }
   }
 }
