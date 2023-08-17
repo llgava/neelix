@@ -2,6 +2,7 @@ package net.llgava.events;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -11,13 +12,15 @@ public class SubcommandNotFoundEvent extends Event {
 
   @Getter @Setter private boolean cancelled;
   @Getter private final Player player;
+  @Getter private final Command parent;
 
   /**
    * Triggered when a player executes a subcommand that doesn't exist.
    * @param player The player who executed the invalid subcommand.
    */
-  public SubcommandNotFoundEvent(Player player) {
+  public SubcommandNotFoundEvent(Player player, Command parent) {
     this.player = player;
+    this.parent = parent;
   }
 
   @Override

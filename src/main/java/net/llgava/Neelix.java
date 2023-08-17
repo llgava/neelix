@@ -16,6 +16,8 @@ public class Neelix extends JavaPlugin {
     super(loader, description, dataFolder, file);
   }
 
+  public Neelix() {}
+
   @Override
   public void onEnable() { /* Nothing to do here :) */ }
 }

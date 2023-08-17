@@ -45,7 +45,7 @@ public class NeelixCommandExecutor implements TabExecutor {
 
       if(subcommand == null) {
         Bukkit.getServer().getPluginManager()
-          .callEvent(new SubcommandNotFoundEvent(player));
+          .callEvent(new SubcommandNotFoundEvent(player, command));
         return true;
       }
 
@@ -76,6 +76,15 @@ public class NeelixCommandExecutor implements TabExecutor {
       }
 
       return completes;
+    }
+
+    if (args.length == 2) {
+      NeelixSubcommand subcommand = this.getSubcommandByName(args[0]);
+      if (subcommand == null) {
+        return EMPTY_TAB_COMPLETER;
+      }
+
+      return subcommand.onTabComplete(sender, command, alias, args);
     }
 
     return EMPTY_TAB_COMPLETER;

@@ -3,11 +3,12 @@ package net.llgava.commands;
 import lombok.Getter;
 import net.llgava.utils.NeelixMessages;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import java.util.Objects;
 
-public abstract class NeelixSubcommand {
+public abstract class NeelixSubcommand implements TabCompleter {
   @Getter private final String name;
   @Getter private final String permission;
 

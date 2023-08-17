@@ -2,12 +2,12 @@ package net.llgava.utils;
 
 /** Default values for everything. */
 public enum NeelixDefaultValues {
-  NEXT_PAGE_ITEM_TITLE("Next page"),
-  PREVIOUS_PAGE_ITEM_TITLE("Previous page"),
+  NEXT_PAGE_ITEM_TITLE("&fNext page&r"),
+  PREVIOUS_PAGE_ITEM_TITLE("&fPrevious page&r"),
   NEXT_PAGE_ITEM_SLOT(8),
   PREVIOUS_PAGE_ITEM_SLOT(0),
-  TRUE_ITEM_TITLE("Enabled"),
-  FALSE_ITEM_TITLE("Disabled");
+  TRUE_ITEM_TITLE("&fEnabled&r"),
+  FALSE_ITEM_TITLE("&fDisabled&r");
 
   private final String value;
 
@@ -24,7 +24,10 @@ public enum NeelixDefaultValues {
     return null;
   }
 
-  public String getString() { return this.value; }
+  public String getString() {
+    return this.value
+      .replace("&", "§");
+  }
 
   public int getInt() { return Integer.parseInt(this.value); }
 }
